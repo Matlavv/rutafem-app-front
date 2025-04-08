@@ -33,7 +33,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="travel"
+        name="ride"
         options={{
           title: 'Voyager',
           tabBarIcon: ({ color }) => (
