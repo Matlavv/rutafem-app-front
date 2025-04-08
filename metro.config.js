@@ -1,7 +1,10 @@
 const { getDefaultConfig } = require('expo/metro-config');
 
-const config = getDefaultConfig(__dirname);
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname, {
+    isCSSEnabled: true,
+});
 
-config.resolver.sourceExts.push("ttf", "otf", "png");
+config.resolver.assetExts.push('png');
 
 module.exports = config;
