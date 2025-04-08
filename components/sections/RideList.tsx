@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { images } from '../../assets/images';
-import rides from '../../datas/rides.json';
+import { canyon } from '@/images';
+import rides from '@/datas/rides.json';
 
 type Ride = {
   id: number;
@@ -60,7 +60,7 @@ export default function RideList() {
           >
             <View style={styles.leftContent}>
               <Image
-                source={images.canyon}
+                source={canyon}
                 style={styles.image}
                 resizeMode="cover"
               />

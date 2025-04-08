@@ -1,7 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { images } from '../../assets/images';
+import { canyon } from '@/images';
 
 export default function RideDetails() {
   const params = useLocalSearchParams();
@@ -21,7 +21,7 @@ export default function RideDetails() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={images.canyon} style={styles.image} resizeMode="cover" />
+        <Image source={canyon} style={styles.image} resizeMode="cover" />
       </View>
 
       <View style={styles.contentContainer}>

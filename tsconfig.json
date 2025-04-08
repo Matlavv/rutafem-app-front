@@ -3,11 +3,25 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./*"],
-      "@/styles/*": ["./styles/*"],
-      "@/components/*": ["./components/*"],
-      "@/datas/*": ["./datas/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@/styles/*": [
+        "./styles/*"
+      ],
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/datas/*": [
+        "./datas/*"
+      ],
+      "@/images": [
+        "./assets/images/index"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
