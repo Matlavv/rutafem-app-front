@@ -1,4 +1,4 @@
-import Button from '@/components/button';
+import Button from '@/components/elements/button';
 import { SafeAreaView, Text, StyleSheet, View, ScrollView } from 'react-native';
 import rides from '@/datas/rides.json';
 import { canyon } from '@/images';
@@ -13,19 +13,6 @@ export default function HomeScreen() {
             <Button title="Button" />
 
             <ScrollView style={styles.scrollView}>
-                {rides.rides.map((ride) => (
-                    <View key={ride.id} style={styles.rideContainer}>
-                        <Text style={styles.cityText}>
-                            {ride.departure_city} → {ride.arrival_city}
-                        </Text>
-                        <Text style={styles.priceText}>
-                            {(ride.price / 100).toFixed(2)}€
-                        </Text>
-                        <Text style={styles.dateText}>
-                            {new Date(ride.departure_datetime).toLocaleDateString('fr-FR')}
-                        </Text>
-                    </View>
-                ))}
                 {rides.rides.map((ride) => (
                     <View key={ride.id} style={styles.rideContainer}>
                         <Text style={styles.cityText}>

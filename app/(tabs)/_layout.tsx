@@ -1,8 +1,8 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
+import SvgIcon from '@/components/elements/SvgIcon';
 
-import { IconSymbol } from '@/components/IconSymbol';
 
 export default function TabLayout() {
   return (
@@ -27,8 +27,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Accueil',
-          tabBarIcon: ({ color }: { color: string }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+          tabBarIcon: ({ color, focused }: { color: string, focused: boolean }) => (
+            <SvgIcon name="home" width={24} height={24} fillColor={color} />
           ),
         }}
       />
@@ -37,7 +37,7 @@ export default function TabLayout() {
         options={{
           title: 'Voyager',
           tabBarIcon: ({ color }: { color: string }) => (
-            <IconSymbol size={28} name="car.fill" color={color} />
+            <SvgIcon name="car" width={24} height={24} fillColor={color} />
           ),
         }}
       />
@@ -46,7 +46,7 @@ export default function TabLayout() {
         options={{
           title: 'Profil',
           tabBarIcon: ({ color }: { color: string }) => (
-            <IconSymbol size={28} name="person.fill" color={color} />
+            <SvgIcon name="profile" width={24} height={24} fillColor={color} />
           ),
         }}
       />
