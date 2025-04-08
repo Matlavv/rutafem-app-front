@@ -1,8 +1,11 @@
-import RideList from '@/components/sections/RideList';
 import { router } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { canyon } from '@/images';
+import RideCard from '@/components/card/RideCard';
+import rides from '@/datas/rides.json';
+
+
 
 export default function RideScreen() {
     return (
@@ -27,18 +30,17 @@ export default function RideScreen() {
                         <Text style={styles.addButtonText}>+</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.listContainer}>
-                    <RideList />
-                </View>
+                <ScrollView style={styles.listContainer}>
+                    {rides.rides.map((ride) => (
+                        <RideCard ride={ride} key={ride.id} />
+                    ))}
+                </ScrollView>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     headerContainer: {
         position: 'relative',
     },
@@ -89,5 +91,9 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         marginTop: 16,
+    },
+    rideContainer: {
+        flex: 1,
+        height: 500,
     },
 });

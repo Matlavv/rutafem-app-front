@@ -1,5 +1,5 @@
 import Button from '@/components/button';
-import { SafeAreaView, Text, StyleSheet, View } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, View, ScrollView } from 'react-native';
 import rides from '@/datas/rides.json';
 import { canyon } from '@/images';
 import Header from '@/components/header';
@@ -12,19 +12,34 @@ export default function HomeScreen() {
 
             <Button title="Button" />
 
-            {rides.rides.map((ride) => (
-                <View key={ride.id} style={styles.rideContainer}>
-                    <Text style={styles.cityText}>
-                        {ride.departure_city} → {ride.arrival_city}
-                    </Text>
-                    <Text style={styles.priceText}>
-                        {(ride.price / 100).toFixed(2)}€
-                    </Text>
-                    <Text style={styles.dateText}>
-                        {new Date(ride.departure_datetime).toLocaleDateString('fr-FR')}
-                    </Text>
-                </View>
-            ))}
+            <ScrollView style={styles.scrollView}>
+                {rides.rides.map((ride) => (
+                    <View key={ride.id} style={styles.rideContainer}>
+                        <Text style={styles.cityText}>
+                            {ride.departure_city} → {ride.arrival_city}
+                        </Text>
+                        <Text style={styles.priceText}>
+                            {(ride.price / 100).toFixed(2)}€
+                        </Text>
+                        <Text style={styles.dateText}>
+                            {new Date(ride.departure_datetime).toLocaleDateString('fr-FR')}
+                        </Text>
+                    </View>
+                ))}
+                {rides.rides.map((ride) => (
+                    <View key={ride.id} style={styles.rideContainer}>
+                        <Text style={styles.cityText}>
+                            {ride.departure_city} → {ride.arrival_city}
+                        </Text>
+                        <Text style={styles.priceText}>
+                            {(ride.price / 100).toFixed(2)}€
+                        </Text>
+                        <Text style={styles.dateText}>
+                            {new Date(ride.departure_datetime).toLocaleDateString('fr-FR')}
+                        </Text>
+                    </View>
+                ))}
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -49,5 +64,8 @@ const styles = StyleSheet.create({
     },
     dateText: {
         fontSize: 12,
+    },
+    scrollView: {
+        flex: 1,
     },
 });
