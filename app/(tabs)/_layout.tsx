@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import { IconSymbol } from '@/components/IconSymbol';
 
 export default function TabLayout() {
   return (

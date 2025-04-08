@@ -5,6 +5,15 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@/styles/*": [
+        "./styles/*"
+      ],
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/datas/*": [
+        "./datas/*"
       ]
     }
   },

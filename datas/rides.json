@@ -1,0 +1,79 @@
+{
+    "rides": [
+        {
+            "id": 1,
+            "starting_adress": "15 Rue de la Paix, 75002",
+            "arrival_adress": "23 Avenue des Champs-Élysées, 75008",
+            "departure_city": "Paris",
+            "arrival_city": "Paris",
+            "departure_datetime": "2024-03-20T09:00:00",
+            "arrival_datetime": "2024-03-20T09:30:00",
+            "price": 1500,
+            "status": "scheduled",
+            "availabe_seats": 3,
+            "vehicle_id": 1,
+            "created_at": "2024-03-15T10:00:00",
+            "updated_at": "2024-03-15T10:00:00"
+        },
+        {
+            "id": 2,
+            "starting_adress": "45 Rue de la République, 69001",
+            "arrival_adress": "10 Place Bellecour, 69002",
+            "departure_city": "Lyon",
+            "arrival_city": "Lyon",
+            "departure_datetime": "2024-03-21T14:00:00",
+            "arrival_datetime": "2024-03-21T14:45:00",
+            "price": 1200,
+            "status": "pending",
+            "availabe_seats": 4,
+            "vehicle_id": 2,
+            "created_at": "2024-03-15T11:30:00",
+            "updated_at": "2024-03-15T11:30:00"
+        },
+        {
+            "id": 3,
+            "starting_adress": "20 Rue du Vieux Port, 13001",
+            "arrival_adress": "15 Avenue du Prado, 13008",
+            "departure_city": "Marseille",
+            "arrival_city": "Marseille",
+            "departure_datetime": "2024-03-22T10:00:00",
+            "arrival_datetime": "2024-03-22T10:40:00",
+            "price": 1800,
+            "status": "completed",
+            "availabe_seats": 2,
+            "vehicle_id": 3,
+            "created_at": "2024-03-16T09:00:00",
+            "updated_at": "2024-03-16T09:00:00"
+        },
+        {
+            "id": 4,
+            "starting_adress": "30 Rue du Commerce, 75015",
+            "arrival_adress": "5 Boulevard Saint-Germain, 75006",
+            "departure_city": "Paris",
+            "arrival_city": "Paris",
+            "departure_datetime": "2024-03-23T16:00:00",
+            "arrival_datetime": "2024-03-23T16:35:00",
+            "price": 1600,
+            "status": "scheduled",
+            "availabe_seats": 1,
+            "vehicle_id": 4,
+            "created_at": "2024-03-16T14:00:00",
+            "updated_at": "2024-03-16T14:00:00"
+        },
+        {
+            "id": 5,
+            "starting_adress": "8 Place Wilson, 31000",
+            "arrival_adress": "45 Rue Alsace-Lorraine, 31000",
+            "departure_city": "Toulouse",
+            "arrival_city": "Toulouse",
+            "departure_datetime": "2024-03-24T11:00:00",
+            "arrival_datetime": "2024-03-24T11:30:00",
+            "price": 1400,
+            "status": "pending",
+            "availabe_seats": 3,
+            "vehicle_id": 5,
+            "created_at": "2024-03-17T08:00:00",
+            "updated_at": "2024-03-17T08:00:00"
+        }
+    ]
+}
