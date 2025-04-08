@@ -14,7 +14,7 @@ export default function CreateRideConfirmation() {
 
   const handleCreateRide = () => {
     setTimeout(() => {
-      router.push('/(tabs)/ride');
+      router.push('/screens/Ride/ride');
     }, 1000);
   };
 

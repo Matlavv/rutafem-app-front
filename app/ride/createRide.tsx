@@ -41,7 +41,7 @@ export default function CreateRide() {
     setTimeout(() => {
       setLoading(false);
       router.push({
-        pathname: '/ride/createRideConfirmation',
+        pathname: './createRideConfirmation',
         params: {
           departure,
           departureAddress,

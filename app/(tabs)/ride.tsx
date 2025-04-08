@@ -25,7 +25,7 @@ export default function RideScreen() {
         <View style={styles.headerRow}>
           <Text style={styles.sectionTitle}>Trajets disponibles</Text>
           <TouchableOpacity
-            onPress={() => router.push('/ride/createRide')}
+            onPress={() => router.push('../Ride/createRide')}
             style={styles.addButton}
           >
             <Text style={styles.addButtonText}>+</Text>
