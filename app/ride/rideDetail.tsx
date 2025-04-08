@@ -36,6 +36,16 @@ export default function RideDetails() {
 
         <View style={styles.detailsContainer}>
           <View style={styles.detailRow}>
+            <Text style={styles.label}>Adresse de départ :</Text>
+            <Text style={styles.value}>{params.departureAddress}</Text>
+          </View>
+
+          <View style={styles.detailRow}>
+            <Text style={styles.label}>Adresse d'arrivée :</Text>
+            <Text style={styles.value}>{params.arrivalAddress}</Text>
+          </View>
+
+          <View style={styles.detailRow}>
             <Text style={styles.label}>Date :</Text>
             <Text style={styles.value}>{params.date}</Text>
           </View>

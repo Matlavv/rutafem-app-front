@@ -9,60 +9,52 @@ import {
   View,
 } from 'react-native';
 import { images } from '../../assets/images';
+import rides from '../../datas/rides.json';
 
 type Ride = {
-  id: string;
-  departure: string;
-  destination: string;
-  date: string;
-  time: string;
+  id: number;
+  starting_adress: string;
+  arrival_adress: string;
+  departure_city: string;
+  arrival_city: string;
+  departure_datetime: string;
+  arrival_datetime: string;
   price: number;
-  availableSeats: number;
+  status: string;
+  availabe_seats: number;
+  vehicle_id: number;
+  created_at: string;
+  updated_at: string;
 };
 
-const MOCK_RIDES: Ride[] = [
-  {
-    id: '1',
-    departure: 'Paris',
-    destination: 'Lyon',
-    date: '2024-04-15',
-    time: '14:30',
-    price: 45,
-    availableSeats: 3,
-  },
-  {
-    id: '2',
-    departure: 'Marseille',
-    destination: 'Nice',
-    date: '2024-04-16',
-    time: '10:00',
-    price: 25,
-    availableSeats: 2,
-  },
-  {
-    id: '3',
-    departure: 'Bordeaux',
-    destination: 'Toulouse',
-    date: '2024-04-17',
-    time: '08:45',
-    price: 35,
-    availableSeats: 4,
-  },
-];
-
 export default function RideList() {
-  const [rides] = useState<Ride[]>(MOCK_RIDES);
+  const [rideList] = useState<Ride[]>(rides.rides);
 
   return (
     <ScrollView style={styles.container}>
-      {rides.map((ride) => (
+      {rideList.map((ride) => (
         <View key={ride.id} style={styles.card}>
           <TouchableOpacity
             style={styles.cardContent}
             onPress={() => {
               router.push({
                 pathname: '/ride/rideDetail',
-                params: ride,
+                params: {
+                  id: ride.id,
+                  departure: ride.departure_city,
+                  destination: ride.arrival_city,
+                  date: new Date(ride.departure_datetime).toLocaleDateString(
+                    'fr-FR',
+                  ),
+                  time: new Date(ride.departure_datetime).toLocaleTimeString(
+                    'fr-FR',
+                    { hour: '2-digit', minute: '2-digit' },
+                  ),
+                  price: (ride.price / 100).toFixed(2),
+                  availableSeats: ride.availabe_seats,
+                  departureAddress: ride.starting_adress,
+                  arrivalAddress: ride.arrival_adress,
+                },
               });
             }}
           >
@@ -74,21 +66,28 @@ export default function RideList() {
               />
               <View style={styles.textContainer}>
                 <View style={styles.destinationContainer}>
-                  <Text style={styles.boldText}>{ride.departure}</Text>
+                  <Text style={styles.boldText}>{ride.departure_city}</Text>
                   <Text style={styles.arrow}>→</Text>
-                  <Text style={styles.boldText}>{ride.destination}</Text>
+                  <Text style={styles.boldText}>{ride.arrival_city}</Text>
                 </View>
                 <Text style={styles.grayText}>
-                  {ride.date} - {ride.time}
+                  {new Date(ride.departure_datetime).toLocaleDateString(
+                    'fr-FR',
+                  )}{' '}
+                  -{' '}
+                  {new Date(ride.departure_datetime).toLocaleTimeString(
+                    'fr-FR',
+                    { hour: '2-digit', minute: '2-digit' },
+                  )}
                 </Text>
                 <Text style={styles.grayText}>
-                  {ride.availableSeats} place
-                  {ride.availableSeats > 1 ? 's' : ''} disponible
-                  {ride.availableSeats > 1 ? 's' : ''}
+                  {ride.availabe_seats} place
+                  {ride.availabe_seats > 1 ? 's' : ''} disponible
+                  {ride.availabe_seats > 1 ? 's' : ''}
                 </Text>
               </View>
             </View>
-            <Text style={styles.price}>{ride.price}€</Text>
+            <Text style={styles.price}>{(ride.price / 100).toFixed(2)}€</Text>
           </TouchableOpacity>
         </View>
       ))}
