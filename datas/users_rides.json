@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "ride_id": 1,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 2,
+        "user_id": 2,
+        "ride_id": 1,
+        "driver": false,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 3,
+        "user_id": 3,
+        "ride_id": 1,
+        "driver": false,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 4,
+        "user_id": 4,
+        "ride_id": 1,
+        "driver": false,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 5,
+        "user_id": 2,
+        "ride_id": 2,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 6,
+        "user_id": 3,
+        "ride_id": 3,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 7,
+        "user_id": 4,
+        "ride_id": 4,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 8,
+        "user_id": 1,
+        "ride_id": 5,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    }
+]

@@ -8,7 +8,7 @@ export default function HomeScreen() {
     return (
         <SafeAreaView style={styles.container}>
 
-            <Header title="Paris" image={canyon} />
+            <Header title="Paris" image={canyon} showBackButton={false} />
 
             <Button title="Button" />
 

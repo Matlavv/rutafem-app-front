@@ -5,13 +5,13 @@ import Header from '@/components/header';
 import rides from '@/datas/rides.json';
 import { canyon } from '@/images';
 import { colors } from '@/styles/colors';
-import { IconSymbol } from '@/components/IconSymbol';
 import SvgIcon from '@/components/elements/SvgIcon';
+
 
 export default function RideScreen() {
     return (
         <View>
-            <Header title="RutaFem" image={canyon} />
+            <Header title="RutaFem" image={canyon} showBackButton={false} />
             <View style={styles.contentContainer}>
                 <View style={styles.headerRow}>
                     <Text style={styles.sectionTitle}>Trajets disponibles</Text>

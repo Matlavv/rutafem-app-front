@@ -22,22 +22,7 @@ export default function RideCard({ ride }: { ride: Ride }) {
                 onPress={() => {
                     router.push({
                         pathname: '/Ride/rideDetail',
-                        params: {
-                            id: ride.id,
-                            departure: ride.departure_city,
-                            destination: ride.arrival_city,
-                            date: new Date(ride.departure_datetime).toLocaleDateString(
-                                'fr-FR',
-                            ),
-                            time: new Date(ride.departure_datetime).toLocaleTimeString(
-                                'fr-FR',
-                                { hour: '2-digit', minute: '2-digit' },
-                            ),
-                            price: (ride.price / 100).toFixed(2),
-                            availableSeats: ride.availabe_seats,
-                            departureAddress: ride.starting_adress,
-                            arrivalAddress: ride.arrival_adress,
-                        },
+                        params: ride
                     });
                 }}
             >
@@ -82,7 +67,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 16,
         borderRadius: 16,
-        marginVertical: 8,
+        marginVertical: 6,
     },
     cardContent: {
         flexDirection: 'row',
