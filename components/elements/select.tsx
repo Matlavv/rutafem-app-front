@@ -3,25 +3,31 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import colors from "@/styles/colors";
 
 
-export default function Select({ options, icon, onChange }: { options: { label: string, value: number }[], icon: React.ReactNode, onChange: (value: number) => void }) {
+export default function Select({ options, icon, onChange, isSelectOpen, onToggle }: {
+    options: { label: string, value: number }[],
+    icon: React.ReactNode,
+    onChange: (value: number) => void,
+    isSelectOpen: boolean,
+    onToggle: () => void
+}) {
 
-    const [isOpen, setIsOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState(options[0].value);
+
 
     const onPress = (value: any) => {
         onChange(value);
-        setIsOpen(false);
         setSelectedValue(value);
+        onToggle();
     }
 
     return (
         <View style={styles.select}>
-            <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }} onPress={() => setIsOpen(!isOpen)}>
+            <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }} onPress={onToggle}>
                 <View style={{ flexShrink: 0 }}>{icon && icon}</View>
                 <Text numberOfLines={1} style={styles.select__text}>{selectedValue} voyageuses</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.select__pop, { opacity: isOpen ? 1 : 0 }]} onPress={() => setIsOpen(!isOpen)}>
+            <TouchableOpacity style={[styles.select__pop, { opacity: isSelectOpen ? 1 : 0 }]} onPress={onToggle}>
                 {options.map((option, i) => (
                     <TouchableOpacity style={styles.option} key={i} onPress={() => onPress(option.value)}>
                         <Text numberOfLines={1}>{option.label}</Text>

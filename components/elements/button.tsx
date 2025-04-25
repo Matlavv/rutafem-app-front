@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fixedBottom: {
         zIndex: 10,
         position: 'absolute',
-        bottom: 30,
+        bottom: 25,
         left: 0,
         right: 0,
         paddingVertical: 16,
