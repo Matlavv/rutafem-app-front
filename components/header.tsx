@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Text, View, ImageSourcePropType, StyleSheet, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import SvgIcon from './elements/SvgIcon';
-import { colors } from '@/styles/colors';
+import colors from '@/styles/colors';
 
 export default function header({ title, image, supTitle, subtitle, showBackButton = true }: { title: string, image: ImageSourcePropType, supTitle?: string, subtitle?: string, showBackButton?: boolean }) {
     return (

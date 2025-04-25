@@ -64,10 +64,11 @@ export default function RideCard({ ride }: { ride: Ride }) {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: 'white',
         padding: 16,
         borderRadius: 16,
         marginVertical: 6,
+        boxShadow: '0px 0px 5px 0px rgba(0, 0, 0, 0.2)',
+        marginHorizontal: 3,
     },
     cardContent: {
         flexDirection: 'row',

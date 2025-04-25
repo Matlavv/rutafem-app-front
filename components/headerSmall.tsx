@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { logoRutafem } from '@/images';
-import { colors } from '@/styles/colors';
+import colors from '@/styles/colors';
 
 
 export default function HeaderSmall() {

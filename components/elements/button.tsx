@@ -1,5 +1,5 @@
 import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react-native';
-import { colors } from '@/styles/colors';
+import colors from '@/styles/colors';
 
 interface ButtonProps {
     title: string;
@@ -7,13 +7,15 @@ interface ButtonProps {
     disabled?: boolean;
     color?: string;
     isFixedBottom?: boolean;
+    disabledColor?: string;
 }
 
-export default function Button({ title, onPress, disabled = false, color = colors.primary, isFixedBottom = false }: ButtonProps) {
+export default function Button({ title, onPress, disabled = false, disabledColor, color = colors.primary, isFixedBottom = false }: ButtonProps) {
     return (
         <TouchableOpacity
-            style={[styles.button, disabled && styles.disabledButton, isFixedBottom && styles.fixedBottom, {
-                backgroundColor: color
+            style={[styles.button, isFixedBottom && styles.fixedBottom, {
+                backgroundColor: (disabled && disabledColor) ? disabledColor : color,
+                opacity: (disabled && !disabledColor) ? 0.6 : 1,
             }]}
             onPress={onPress}
             disabled={disabled}
@@ -30,9 +32,6 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         borderRadius: 12,
         alignItems: 'center',
-    },
-    disabledButton: {
-        opacity: 0.6,
     },
     fixedBottom: {
         zIndex: 10,

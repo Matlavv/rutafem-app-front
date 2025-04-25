@@ -4,7 +4,7 @@ import RideCard from '@/components/card/RideCard';
 import Header from '@/components/header';
 import rides from '@/datas/rides.json';
 import { canyon } from '@/images';
-import { colors } from '@/styles/colors';
+import colors from '@/styles/colors';
 import SvgIcon from '@/components/elements/SvgIcon';
 
 

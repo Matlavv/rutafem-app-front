@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 import SvgIcon from '@/components/elements/SvgIcon';
-
+import colors from '@/styles/colors';
 
 export default function TabLayout() {
   return (
@@ -11,14 +11,18 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#FF0381',
         headerShown: false,
         tabBarStyle: Platform.select({
-          ios: {
-            // position: 'absolute',
-            backgroundColor: '#F4F3F1',
-            borderTopWidth: 0,
-          },
+          // ios: {
+          //   position: 'absolute',
+          //   backgroundColor: '#F4F3F1',
+          //   borderTopWidth: 0,
+          // },
           default: {
-            backgroundColor: '#F4F3F1',
+            backgroundColor: '#FFFFFF',
             borderTopWidth: 0,
+            boxShadow: `0px 0px 0px 1px ${colors.grayLight}`,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            paddingTop: 10,
           },
         }),
       }}

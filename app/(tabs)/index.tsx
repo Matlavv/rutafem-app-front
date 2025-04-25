@@ -1,15 +1,35 @@
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { canyon } from '@/images';
+import { SafeAreaView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { useState } from 'react';
+import DateTimePicker, { DateType, useDefaultStyles } from 'react-native-ui-datepicker';
+import dayjs from 'dayjs';
 
 // COMPONENTS
 import Button from '@/components/elements/button';
 import HeaderSmall from '@/components/headerSmall';
-import { colors } from '@/styles/colors';
+import colors from '@/styles/colors';
 import SvgIcon from '@/components/elements/SvgIcon';
+import Select from '@/components/elements/select';
+
+// IMAGES
+import { backgroundRoad } from '@/assets/images';
+
 
 export default function HomeScreen() {
+
+    const defaultStyles = useDefaultStyles();
+    const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+
+    const [departurePosition, setDeparturePosition] = useState('');
+    const [arrivalPosition, setArrivalPosition] = useState('');
+    const [departureDate, setDepartureDate] = useState<DateType>();
+    const [passengers, setPassengers] = useState(1);
+
     return (
         <SafeAreaView style={styles.container}>
+
+            <Image source={backgroundRoad} style={styles.backgroundRoad} />
+            <Image source={backgroundRoad} style={styles.backgroundRoad2} />
+
             <View style={styles.homeContainer}>
 
                 <HeaderSmall />
@@ -30,6 +50,7 @@ export default function HomeScreen() {
                             placeholder="Départ"
                             style={[styles.searchInput, styles.searchInput__start]}
                             placeholderTextColor={colors.gray}
+                            onChangeText={(text) => setDeparturePosition(text)}
                         />
                     </View>
                     <View>
@@ -38,6 +59,7 @@ export default function HomeScreen() {
                             placeholder="Arrivée"
                             style={[styles.searchInput, styles.searchInput__end]}
                             placeholderTextColor={colors.gray}
+                            onChangeText={(text) => setArrivalPosition(text)}
                         />
                     </View>
                 </View>
@@ -47,12 +69,88 @@ export default function HomeScreen() {
                     <Text style={styles.geoloc__text}>Utiliser ma position actuelle</Text>
                 </TouchableOpacity>
 
-                <View style={styles.dateContainer}>
+                <View style={{ flexDirection: 'row', alignItems: 'stretch', gap: 50 }}>
                     <View>
-                        <Text style={styles.date__label}>Date</Text>
+                        <TouchableOpacity onPress={() => setIsDatePickerVisible(true)}>
+                            <Text style={styles.pick__label}>Date de départ</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                                <SvgIcon name="calendar" fillColor={colors.secondary} strokeColor="transparent" width={24} height={24} />
+                                <Text style={styles.picked_label}>{departureDate ? dayjs(departureDate).format('DD/MM/YYYY') : 'Sélectionner'}</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={[styles.datePicker, { opacity: isDatePickerVisible ? 1 : 0 }]}>
+                            <DateTimePicker
+                                mode="single"
+                                date={departureDate}
+                                onChange={({ date }) => {
+                                    setDepartureDate(date);
+                                    setTimeout(() => {
+                                        setIsDatePickerVisible(false);
+                                    }, 200);
+                                }}
+                                style={{
+                                    backgroundColor: colors.white,
+                                    boxShadow: '0px 0px 5px 0px rgba(0, 0, 0, 0.2)',
+                                    borderRadius: 10,
+                                    padding: 10,
+                                    width: 350,
+                                }}
+                                styles={{
+                                    ...defaultStyles,
+                                    day_label: {
+                                        color: colors.black,
+                                    },
+                                    day_cell: {
+                                        borderRadius: "50%",
+                                        aspectRatio: 1,
+                                        padding: 4
+                                    },
+                                    selected: {
+                                        backgroundColor: colors.secondary,
+                                        color: colors.white,
+                                        borderRadius: "50%",
+                                    },
+                                    selected_label: {
+                                        color: colors.white,
+                                    },
+                                    today: {
+                                        borderColor: colors.black,
+                                        borderWidth: 1,
+                                        borderRadius: 10,
+                                    },
+                                    today_label: {
+                                        color: colors.black,
+                                    },
+                                    month_selector_label: {
+                                        color: colors.black,
+                                    },
+                                    year_selector_label: {
+                                        color: colors.black,
+                                    },
+                                    button_next_image: {
+                                        tintColor: colors.black,
+                                    },
+                                    button_prev_image: {
+                                        tintColor: colors.black,
+                                    },
+
+
+                                }}
+                                locale="fr"
+                            />
+                        </View>
+                    </View>
+
+                    <View>
+                        <Text style={styles.pick__label}>Voyageuses</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                            <SvgIcon name="calendar" fillColor={colors.secondary} strokeColor="transparent" width={24} height={24} />
-                            <Text>25/04/2025</Text>
+                            <Select
+                                options={[{ label: "1 voyageuse", value: 1 }, { label: "2 voyageuses", value: 2 }, { label: "3 voyageuses", value: 3 }, { label: "4 voyageuses", value: 4 }, { label: "5 voyageuses", value: 5 }]}
+                                icon={<SvgIcon name="profile" fillColor={colors.secondary} width={24} height={24} />}
+                                onChange={(value: number) => {
+                                    setPassengers(value);
+                                }}
+                            />
                         </View>
                     </View>
                 </View>
@@ -60,8 +158,9 @@ export default function HomeScreen() {
                 <Button
                     title="Rechercher"
                     color={colors.secondary}
-                    disabled={true}
+                    disabled={departurePosition === '' || arrivalPosition === '' || departureDate === undefined}
                     isFixedBottom={true}
+                    disabledColor={colors.secondaryLight}
                 />
 
             </View>
@@ -81,7 +180,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         fontWeight: 'bold',
-        marginTop: 50,
+        marginTop: 30,
         marginBottom: 30,
     },
     searchContainer: {
@@ -90,6 +189,7 @@ const styles = StyleSheet.create({
     searchInput: {
         borderWidth: 1,
         borderColor: colors.gray,
+        backgroundColor: colors.white,
         padding: 16,
         paddingTop: 30,
         paddingLeft: 50,
@@ -119,6 +219,7 @@ const styles = StyleSheet.create({
         bottom: 28,
         left: 22,
         alignItems: 'center',
+        zIndex: 1,
     },
     search__visual_circle: {
         width: 10,
@@ -135,18 +236,46 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 4,
+        marginBottom: 40,
     },
     geoloc__text: {
         color: colors.secondary,
         fontSize: 14,
         fontWeight: 'bold',
     },
-    dateContainer: {
-        marginTop: 30,
+    pick__label: {
+        fontSize: 14,
+        fontWeight: 'semibold',
+        marginBottom: 8,
     },
-    date__label: {
+    picked_label: {
         fontSize: 14,
         fontWeight: 'bold',
-        marginBottom: 8,
+    },
+    datePicker: {
+        position: 'absolute',
+        zIndex: 20,
+        borderRadius: 10,
+        flex: 1,
+        top: 0,
+        opacity: 0,
+    },
+    backgroundRoad: {
+        position: 'absolute',
+        zIndex: -1,
+        width: 400,
+        objectFit: 'contain',
+        bottom: -250,
+        left: -130,
+        right: 0,
+    },
+    backgroundRoad2: {
+        position: 'absolute',
+        zIndex: -1,
+        width: 350,
+        objectFit: 'contain',
+        top: -80,
+        right: -300,
+        transform: [{ rotate: '-167.66deg' }],
     },
 });
