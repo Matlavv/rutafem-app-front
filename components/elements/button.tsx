@@ -5,12 +5,16 @@ interface ButtonProps {
     title: string;
     onPress?: (event: GestureResponderEvent) => void;
     disabled?: boolean;
+    color?: string;
+    isFixedBottom?: boolean;
 }
 
-export default function Button({ title, onPress, disabled = false }: ButtonProps) {
+export default function Button({ title, onPress, disabled = false, color = colors.primary, isFixedBottom = false }: ButtonProps) {
     return (
         <TouchableOpacity
-            style={[styles.button, disabled && styles.disabledButton]}
+            style={[styles.button, disabled && styles.disabledButton, isFixedBottom && styles.fixedBottom, {
+                backgroundColor: color
+            }]}
             onPress={onPress}
             disabled={disabled}
         >
@@ -22,17 +26,27 @@ export default function Button({ title, onPress, disabled = false }: ButtonProps
 const styles = StyleSheet.create({
     button: {
         backgroundColor: colors.primary,
-        paddingHorizontal: 18,
-        paddingVertical: 8,
-        borderRadius: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 16,
+        borderRadius: 12,
         alignItems: 'center',
     },
     disabledButton: {
-        backgroundColor: '#A9A9A9',
+        opacity: 0.6,
+    },
+    fixedBottom: {
+        zIndex: 10,
+        position: 'absolute',
+        bottom: 30,
+        left: 0,
+        right: 0,
+        paddingVertical: 16,
+        alignItems: 'center',
+        marginTop: 'auto',
     },
     buttonText: {
         color: colors.white,
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
     },
 });

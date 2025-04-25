@@ -1,11 +1,16 @@
-import { canyon } from '@/images';
-import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
+import { canyon } from '@/images';
+
+// COMPONENTS
 import Header from '@/components/header';
+import SvgIcon from '@/components/elements/SvgIcon';
+import Button from '@/components/elements/button';
+
+// DATAS
 import users_rides from '@/datas/users_rides.json';
 import users from '@/datas/users.json';
-import SvgIcon from '@/components/elements/SvgIcon';
 
 
 export default function RideDetails() {
@@ -37,105 +42,105 @@ export default function RideDetails() {
 
             <Header supTitle="Ton voyage à" title={params.arrival_city as string} subtitle="est presque prêt" image={canyon} />
 
-            <ScrollView style={styles.contentContainer}>
+            <View style={styles.contentContainer}>
 
-                <View style={styles.rideCard}>
-                    <View style={styles.rideCard__header}>
-                        <Text style={styles.rideCard__header_city}>{params.departure_city}</Text>
+                <ScrollView>
 
-                        <View style={styles.rideCard__visual}>
-                            <View style={styles.rideCard__visual_circle} />
-                            <View style={styles.rideCard__visual_dash} />
-                            <View style={styles.rideCard__visual_circle} />
+                    <View style={styles.rideCard}>
+                        <View style={styles.rideCard__header}>
+                            <Text style={styles.rideCard__header_city}>{params.departure_city}</Text>
+
+                            <View style={styles.rideCard__visual}>
+                                <View style={styles.rideCard__visual_circle} />
+                                <View style={styles.rideCard__visual_dash} />
+                                <View style={styles.rideCard__visual_circle} />
+                            </View>
+
+                            <Text style={styles.rideCard__header_city}>{params.arrival_city}</Text>
                         </View>
 
-                        <Text style={styles.rideCard__header_city}>{params.arrival_city}</Text>
+                        <View style={styles.rideCard__info}>
+                            <Text style={styles.rideCard__info_date}>{new Date(params.departure_datetime as string).toLocaleDateString('fr-FR')}</Text>
+                            <Text style={styles.rideCard__info_price}>{params.price} €</Text>
+                        </View>
                     </View>
 
-                    <View style={styles.rideCard__info}>
-                        <Text style={styles.rideCard__info_date}>{new Date(params.departure_datetime as string).toLocaleDateString('fr-FR')}</Text>
-                        <Text style={styles.rideCard__info_price}>{params.price} €</Text>
-                    </View>
-                </View>
+                    {driver && (
+                        <View style={styles.driverCard}>
+                            <View style={styles.driverCard__left}>
+                                <View>
+                                    <Text style={styles.driverCard__header_label}>Ta conductrice</Text>
+                                    <Text style={styles.driverCard__header_name}>{driver?.firstname} {driver?.lastname}</Text>
+                                    <View style={styles.driverCard__header_stars}>
+                                        {Array.from({ length: 5 }).map((_, i) => {
+                                            const rating = driver?.rating ?? 0;
+                                            const full = i + 1 <= rating;
+                                            const half = !full && i + 0.5 <= rating;
 
-                {driver && (
-                    <View style={styles.driverCard}>
-                        <View style={styles.driverCard__left}>
-                            <View>
-                                <Text style={styles.driverCard__header_label}>Ta conductrice</Text>
-                                <Text style={styles.driverCard__header_name}>{driver?.firstname} {driver?.lastname}</Text>
-                                <View style={styles.driverCard__header_stars}>
-                                    {Array.from({ length: 5 }).map((_, i) => {
-                                        const rating = driver?.rating ?? 0;
-                                        const full = i + 1 <= rating;
-                                        const half = !full && i + 0.5 <= rating;
+                                            return (
+                                                <SvgIcon
+                                                    key={i}
+                                                    name={half ? "starHalf" : "star"}
+                                                    width={15}
+                                                    height={15}
+                                                    fillColor={full || half ? "#FFBA00" : "#BDBDBD"}
+                                                    strokeColor={"#BDBDBD"}
+                                                    strokeWidth={0}
+                                                />
+                                            );
+                                        })}
+                                    </View>
 
-                                        return (
-                                            <SvgIcon
-                                                key={i}
-                                                name={half ? "starHalf" : "star"}
-                                                width={15}
-                                                height={15}
-                                                fillColor={full || half ? "#FFBA00" : "#BDBDBD"}
-                                                strokeColor={"#BDBDBD"}
-                                                strokeWidth={0}
+                                </View>
+
+                                <View style={styles.vehicleInfo}>
+                                    <Text style={styles.vehicleTitle}>Véhicule vérifié</Text>
+                                    <Text>Citroen C3</Text>
+                                    <Text>Identification: CBR455</Text>
+                                </View>
+
+                                <View>
+                                    <View style={styles.passengersContainer}>
+                                        {passengers?.map((passenger) => (
+                                            <Image
+                                                key={passenger.id}
+                                                source={{ uri: passenger.profile_image_url }}
+                                                style={styles.passengerImage}
                                             />
-                                        );
-                                    })}
+                                        ))}
+                                    </View>
+                                    <Text style={styles.reservedInfo}>{passengers.length} voyageuses ont réservé ce voyage</Text>
                                 </View>
 
                             </View>
-
-                            <View style={styles.vehicleInfo}>
-                                <Text style={styles.vehicleTitle}>Véhicule vérifié</Text>
-                                <Text>Citroen C3</Text>
-                                <Text>Identification: CBR455</Text>
-                            </View>
-
-                            <View>
-                                <View style={styles.passengersContainer}>
-                                    {passengers?.map((passenger) => (
-                                        <Image
-                                            key={passenger.id}
-                                            source={{ uri: passenger.profile_image_url }}
-                                            style={styles.passengerImage}
-                                        />
-                                    ))}
+                            <View style={styles.driverImageContainer}>
+                                <Image
+                                    source={{ uri: driver?.profile_image_url }}
+                                    style={styles.driverImage}
+                                />
+                                <View style={styles.socialIcons}>
+                                    <Text style={{ fontSize: 24 }}>📸 👍 🎵</Text>
                                 </View>
-                                <Text style={styles.reservedInfo}>{passengers.length} voyageuses ont réservé ce voyage</Text>
                             </View>
 
                         </View>
-                        <View style={styles.driverImageContainer}>
-                            <Image
-                                source={{ uri: driver?.profile_image_url }}
-                                style={styles.driverImage}
-                            />
-                            <View style={styles.socialIcons}>
-                                <Text style={{ fontSize: 24 }}>📸 👍 🎵</Text>
-                            </View>
-                        </View>
-
-                    </View>
-                )}
+                    )}
 
 
 
-                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                    {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
 
-            </ScrollView>
+                </ScrollView>
 
+                <Button
+                    title={loading ? 'Chargement...' : 'Rejoindre'}
+                    onPress={handleJoinRide}
+                    disabled={loading}
+                    isFixedBottom={true}
+                />
 
-            <TouchableOpacity
-                style={styles.joinButton}
-                onPress={handleJoinRide}
-                disabled={loading}
-            >
-                <Text style={styles.joinButtonText}>
-                    {loading ? 'Chargement...' : 'Rejoindre'}
-                </Text>
-            </TouchableOpacity>
+            </View>
 
         </View>
     );
@@ -149,7 +154,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     contentContainer: {
-        padding: 16,
+        marginHorizontal: 16,
+        flex: 1,
     },
     rideCard: {
         borderRadius: 12,
@@ -275,21 +281,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
-    // JoinButton
-    joinButton: {
-        position: 'absolute',
-        bottom: 30,
-        left: 16,
-        right: 16,
-        backgroundColor: '#EC4899',
-        borderRadius: 9999,
-        paddingVertical: 16,
-        alignItems: 'center',
-        marginTop: 'auto',
-    },
-    joinButtonText: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: '600',
-    },
 });
