@@ -12,12 +12,15 @@ import {
 } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
+// TODO navbar dans login et register
+
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [hasError, setHasError] = useState(false);
   const { login } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -79,16 +82,34 @@ export default function LoginScreen() {
               fillColor={colors.gray}
             />
           </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.inputLabel}>Mot de passe</Text>
-            <TextInput
-              style={styles.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="******"
-              secureTextEntry
-              placeholderTextColor={colors.gray}
-            />
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.inputLabel}>Mot de passe</Text>
+              <TextInput
+                style={styles.input}
+                value={password}
+                onChangeText={setPassword}
+                placeholder="******"
+                secureTextEntry={!showPassword}
+                placeholderTextColor={colors.gray}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={() => setShowPassword((v) => !v)}
+              style={styles.eyeIcon}
+              accessibilityLabel={
+                showPassword
+                  ? 'Masquer le mot de passe'
+                  : 'Afficher le mot de passe'
+              }
+            >
+              <SvgIcon
+                name={showPassword ? 'eye' : 'closedEye'}
+                width={22}
+                height={22}
+                strokeColor={colors.gray}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         {hasError && (
@@ -219,4 +240,9 @@ const styles = StyleSheet.create({
   },
   socialButtonText: { color: colors.text, fontSize: 16, fontWeight: 'bold' },
   socialButtonTextFB: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+  eyeIcon: {
+    marginLeft: 4,
+    padding: 8,
+    zIndex: 2,
+  },
 });
