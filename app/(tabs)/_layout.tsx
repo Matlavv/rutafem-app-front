@@ -1,8 +1,8 @@
+import SvgIcon from '@/components/elements/SvgIcon';
+import colors from '@/styles/colors';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-import SvgIcon from '@/components/elements/SvgIcon';
-import colors from '@/styles/colors';
 
 export default function TabLayout() {
   return (
@@ -31,7 +31,13 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Accueil',
-          tabBarIcon: ({ color, focused }: { color: string, focused: boolean }) => (
+          tabBarIcon: ({
+            color,
+            focused,
+          }: {
+            color: string;
+            focused: boolean;
+          }) => (
             <SvgIcon name="home" width={24} height={24} fillColor={color} />
           ),
         }}
@@ -42,6 +48,21 @@ export default function TabLayout() {
           title: 'Voyager',
           tabBarIcon: ({ color }: { color: string }) => (
             <SvgIcon name="car" width={24} height={24} fillColor={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="message"
+        options={{
+          title: 'Messagerie',
+          tabBarIcon: ({
+            color,
+            focused,
+          }: {
+            color: string;
+            focused: boolean;
+          }) => (
+            <SvgIcon name="message" width={24} height={24} fillColor={color} />
           ),
         }}
       />
