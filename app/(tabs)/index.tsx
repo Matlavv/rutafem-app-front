@@ -12,6 +12,7 @@ import Select from '@/components/elements/select';
 
 // IMAGES
 import { backgroundRoad } from '@/assets/images';
+import { router } from 'expo-router';
 
 
 export default function HomeScreen() {
@@ -172,6 +173,17 @@ export default function HomeScreen() {
                         disabled={departurePosition === '' || arrivalPosition === '' || departureDate === undefined}
                         isFixedBottom={true}
                         disabledColor={colors.secondaryLight}
+                        onPress={() => {
+                            router.push({
+                                pathname: '/(tabs)/ride',
+                                params: {
+                                    departurePosition,
+                                    arrivalPosition,
+                                    departureDate: dayjs(departureDate).format('YYYY-MM-DD'),
+                                    passengers,
+                                }
+                            });
+                        }}
                     />
 
                 </View>

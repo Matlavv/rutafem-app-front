@@ -55,7 +55,7 @@ export default function RideCard({ ride }: { ride: Ride }) {
                         </Text>
                     </View>
                 </View>
-                <Text style={styles.price}>{(ride.price / 100).toFixed(2)}€</Text>
+                <Text style={styles.price}>{Number.isInteger(ride.price) ? ride.price : ride.price.toFixed(2)}€</Text>
             </TouchableOpacity>
         </View>
     )

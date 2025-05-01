@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 
 // COMPONENTS
 import Header from '@/components/header';
@@ -13,10 +13,14 @@ import layout from '@/styles/layout';
 import colors from '@/styles/colors';
 
 // DATAS (temporary)
-import rides from '@/datas/rides.json';
+import ridesDatas from '@/datas/rides.json';
+
 
 
 export default function RideScreen() {
+
+    const params = useLocalSearchParams();
+
 
     const scrollOffsetY = useSharedValue(0);
 
@@ -26,15 +30,34 @@ export default function RideScreen() {
         },
     });
 
+    let rides;
+    if (params.departurePosition && params.arrivalPosition && params.departureDate) {
+        console.log(params.departurePosition, params.arrivalPosition, params.departureDate);
+        console.log(ridesDatas);
+
+        rides = ridesDatas.filter((ride) => {
+            return ride.departure_city === params.departurePosition && ride.arrival_city === params.arrivalPosition && ride.departure_datetime >= params.departureDate;
+        });
+    } else {
+        rides = ridesDatas;
+    }
+
     return (
         <View style={{ flex: 1 }}>
 
-            <Header title="RutaFem" image={canyon} showBackButton={false} scrollOffsetY={scrollOffsetY} />
+            <Header
+                title="RutaFem"
+                image={canyon}
+                showBackButton={false}
+                scrollOffsetY={scrollOffsetY}
+                subtitle={`${rides.length} trajets disponibles`}
+                supTitle={`${params.departurePosition} - ${params.arrivalPosition}`}
+            />
 
             <Animated.FlatList
                 onScroll={onScroll}
                 scrollEventThrottle={16}
-                data={rides.rides}
+                data={rides}
                 renderItem={({ item }) => <RideCard ride={item} key={item.id} />}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={{
