@@ -74,6 +74,51 @@
             "vehicle_id": 5,
             "created_at": "2024-03-17T08:00:00",
             "updated_at": "2024-03-17T08:00:00"
+        },
+        {
+            "id": 6,
+            "starting_adress": "15 Rue de la Paix, 75002",
+            "arrival_adress": "23 Avenue des Champs-Élysées, 75008",
+            "departure_city": "Paris",
+            "arrival_city": "Paris",
+            "departure_datetime": "2024-03-25T12:00:00",
+            "arrival_datetime": "2024-03-25T12:30:00",
+            "price": 1300,
+            "status": "scheduled",
+            "availabe_seats": 2,
+            "vehicle_id": 6,
+            "created_at": "2024-03-17T15:00:00",
+            "updated_at": "2024-03-17T15:00:00"
+        },
+        {
+            "id": 7,
+            "starting_adress": "15 Rue de la Paix, 75002",
+            "arrival_adress": "23 Avenue des Champs-Élysées, 75008",
+            "departure_city": "Paris",
+            "arrival_city": "Paris",
+            "departure_datetime": "2024-03-26T13:00:00",
+            "arrival_datetime": "2024-03-26T13:30:00",
+            "price": 1200,
+            "status": "pending",
+            "availabe_seats": 4,
+            "vehicle_id": 7,
+            "created_at": "2024-03-18T10:00:00",
+            "updated_at": "2024-03-18T10:00:00"
+        },
+        {
+            "id": 8,
+            "starting_adress": "15 Rue de la Paix, 75002",
+            "arrival_adress": "23 Avenue des Champs-Élysées, 75008",
+            "departure_city": "Paris",
+            "arrival_city": "Paris",
+            "departure_datetime": "2024-03-27T14:00:00",
+            "arrival_datetime": "2024-03-27T14:30:00",
+            "price": 1100,
+            "status": "scheduled",
+            "availabe_seats": 3,
+            "vehicle_id": 8,
+            "created_at": "2024-03-18T15:00:00",
+            "updated_at": "2024-03-18T15:00:00"
         }
     ]
 }

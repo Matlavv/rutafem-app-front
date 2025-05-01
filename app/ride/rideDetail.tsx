@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { canyon } from '@/images';
+import layout from '@/styles/layout';
 
 // COMPONENTS
 import Header from '@/components/header';
@@ -11,6 +12,7 @@ import Button from '@/components/elements/button';
 // DATAS
 import users_rides from '@/datas/users_rides.json';
 import users from '@/datas/users.json';
+import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
 
 
 export default function RideDetails() {
@@ -37,14 +39,30 @@ export default function RideDetails() {
     console.log(passengersIds);
     console.log(passengers);
 
+    const scrollOffsetY = useSharedValue(0);
+
+    const onScroll = useAnimatedScrollHandler({
+        onScroll: (event) => {
+            scrollOffsetY.value = event.contentOffset.y;
+        },
+    });
+
     return (
         <View style={styles.rideDetail}>
 
-            <Header supTitle="Ton voyage à" title={params.arrival_city as string} subtitle="est presque prêt" image={canyon} />
+            <Header supTitle="Ton voyage à" title={params.arrival_city as string} subtitle="est presque prêt" image={canyon} scrollOffsetY={scrollOffsetY} />
 
             <View style={styles.contentContainer}>
 
-                <ScrollView>
+                <Animated.ScrollView
+                    showsVerticalScrollIndicator={false}
+                    scrollEventThrottle={16}
+                    onScroll={onScroll}
+                    contentContainerStyle={{
+                        paddingTop: layout.headerMaxHeight + 16,
+                    }}
+
+                >
 
                     <View style={styles.rideCard}>
                         <View style={styles.rideCard__header}>
@@ -126,18 +144,16 @@ export default function RideDetails() {
                         </View>
                     )}
 
-
-
                     {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-
-                </ScrollView>
+                </Animated.ScrollView>
 
                 <Button
                     title={loading ? 'Chargement...' : 'Rejoindre'}
                     onPress={handleJoinRide}
                     disabled={loading}
                     isFixedBottom={true}
+                    style={styles.button}
                 />
 
             </View>
@@ -154,10 +170,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     contentContainer: {
-        marginHorizontal: 16,
         flex: 1,
     },
     rideCard: {
+        marginHorizontal: 16,
         borderRadius: 12,
         padding: 16,
         boxShadow: '0px 0px 10px #00000021',
@@ -206,6 +222,7 @@ const styles = StyleSheet.create({
 
     // DriverCard
     driverCard: {
+        marginHorizontal: 16,
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderRadius: 12,
@@ -279,6 +296,10 @@ const styles = StyleSheet.create({
     errorText: {
         color: '#EF4444',
         textAlign: 'center',
+    },
+
+    button: {
+        marginHorizontal: 16,
     },
 
 });

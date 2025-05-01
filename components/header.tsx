@@ -1,38 +1,63 @@
 import React from 'react'
-import { Image, Text, View, ImageSourcePropType, StyleSheet, TouchableOpacity } from 'react-native';
+import Animated, { useAnimatedStyle, interpolate, Extrapolate } from 'react-native-reanimated';
+import { Image, Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 import SvgIcon from './elements/SvgIcon';
 import colors from '@/styles/colors';
+import layout from '@/styles/layout';
 
-export default function header({ title, image, supTitle, subtitle, showBackButton = true }: { title: string, image: ImageSourcePropType, supTitle?: string, subtitle?: string, showBackButton?: boolean }) {
+
+type HeaderProps = {
+    title: string;
+    image: any;
+    supTitle?: string;
+    subtitle?: string;
+    showBackButton?: boolean;
+    scrollOffsetY?: Animated.SharedValue<number>;
+}
+
+export default function Header({ title, image, supTitle, subtitle, showBackButton = true, scrollOffsetY }: HeaderProps) {
+
+    let animatedHeaderStyle;
+    if (scrollOffsetY) {
+        animatedHeaderStyle = useAnimatedStyle(() => {
+            const height = interpolate(
+                scrollOffsetY.value,
+                [0, layout.headerMaxHeight - layout.headerMinHeight],
+                [layout.headerMaxHeight, layout.headerMinHeight],
+                Extrapolate.CLAMP
+            );
+            return { height };
+        });
+    }
+
     return (
-        <View style={styles.header}>
-            <Image
-                source={image}
-                style={styles.image}
-                resizeMode="cover"
-            />
+        <Animated.View style={[styles.header, animatedHeaderStyle]}>
+            <Image source={image} style={styles.image} resizeMode="cover" />
             <View style={styles.textContainer}>
                 {supTitle && <Text style={styles.supTitle}>{supTitle}</Text>}
                 <Text style={styles.text}>{title}</Text>
                 {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
             </View>
-
             {showBackButton && (
                 <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
                     <SvgIcon name="arrowLeft" width={24} height={24} strokeColor={colors.black} strokeWidth={2} />
                 </TouchableOpacity>
             )}
-        </View>
-    )
-}
-
+        </Animated.View>
+    );
+};
 
 const styles = StyleSheet.create({
     header: {
-        position: 'relative',
-        height: 300,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10,
         width: '100%',
+        height: layout.headerMaxHeight,
+        overflow: 'hidden',
     },
     image: {
         height: "100%",
@@ -47,6 +72,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: 16,
     },
     text: {
         color: colors.white,
@@ -71,7 +97,4 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 30,
     },
-    backButtonText: {
-        fontSize: 24,
-    },
-})
+});
