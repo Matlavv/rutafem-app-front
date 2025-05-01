@@ -62,5 +62,45 @@
         "driver": true,
         "created_at": "2024-03-15T10:00:00",
         "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 9,
+        "user_id": 2,
+        "ride_id": 6,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 10,
+        "user_id": 3,
+        "ride_id": 6,
+        "driver": false,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 11,
+        "user_id": 4,
+        "ride_id": 6,
+        "driver": false,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 12,
+        "user_id": 1,
+        "ride_id": 7,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
+    },
+    {
+        "id": 13,
+        "user_id": 2,
+        "ride_id": 8,
+        "driver": true,
+        "created_at": "2024-03-15T10:00:00",
+        "updated_at": "2024-03-15T10:00:00"
     }
 ]

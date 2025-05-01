@@ -6,7 +6,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import Header from '@/components/header';
 import RideCard from '@/components/card/RideCard';
 import SvgIcon from '@/components/elements/SvgIcon';
-import { canyon } from '@/images';
+import { mountain, canyon } from '@/images';
 
 // STYLES
 import layout from '@/styles/layout';
@@ -47,11 +47,11 @@ export default function RideScreen() {
 
             <Header
                 title="RutaFem"
-                image={canyon}
+                image={mountain}
                 showBackButton={false}
                 scrollOffsetY={scrollOffsetY}
-                subtitle={`${rides.length} trajets disponibles`}
-                supTitle={`${params.departurePosition} - ${params.arrivalPosition}`}
+                supTitle={params.departurePosition ? `${params.departurePosition} - ${params.arrivalPosition}` : ''}
+                subtitle={rides.length > 0 ? `${rides.length} trajets disponibles` : 'Aucun trajet disponible'}
             />
 
             <Animated.FlatList
@@ -60,11 +60,6 @@ export default function RideScreen() {
                 data={rides}
                 renderItem={({ item }) => <RideCard ride={item} key={item.id} />}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{
-                    paddingTop: layout.headerMaxHeight + 16,
-                    paddingHorizontal: 16,
-                    paddingBottom: 32,
-                }}
                 ListHeaderComponent={() => (
                     <View style={styles.headerRow}>
                         <Text style={styles.sectionTitle}>Trajets disponibles</Text>
@@ -76,6 +71,11 @@ export default function RideScreen() {
                         </TouchableOpacity>
                     </View>
                 )}
+                contentContainerStyle={{
+                    paddingTop: layout.headerMaxHeight + 16,
+                    paddingHorizontal: 16,
+                    paddingBottom: 32,
+                }}
             />
 
         </View>

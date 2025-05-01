@@ -24,7 +24,7 @@ export default function Select({ options, icon, onChange, isSelectOpen, onToggle
         <View style={styles.select}>
             <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }} onPress={onToggle}>
                 <View style={{ flexShrink: 0 }}>{icon && icon}</View>
-                <Text numberOfLines={1} style={styles.select__text}>{selectedValue} voyageuses</Text>
+                <Text numberOfLines={1} style={styles.select__text}>{selectedValue} voyageuse{selectedValue > 1 ? 's' : ''}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.select__pop, { opacity: isSelectOpen ? 1 : 0 }]} onPress={onToggle}>

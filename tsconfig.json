@@ -17,6 +17,9 @@
       ],
       "@/images": [
         "./assets/images/index"
+      ],
+      "@/assets/*": [
+        "./assets/*"
       ]
     }
   },
