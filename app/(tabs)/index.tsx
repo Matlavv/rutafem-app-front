@@ -13,6 +13,7 @@ import Select from '@/components/elements/select';
 // IMAGES
 import { backgroundRoad } from '@/assets/images';
 import { router } from 'expo-router';
+import DatePicker from '@/components/elements/datePicker';
 
 
 export default function HomeScreen() {
@@ -80,76 +81,17 @@ export default function HomeScreen() {
                     </TouchableOpacity>
 
                     <View style={{ flexDirection: 'row', alignItems: 'stretch', gap: 50 }}>
-                        <View>
-                            <TouchableOpacity onPress={() => { setIsDatePickerOpen(true); setIsSelectOpen(false) }}>
-                                <Text style={styles.pick__label}>Date de départ</Text>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                                    <SvgIcon name="calendar" fillColor={colors.secondary} strokeColor="transparent" width={24} height={24} />
-                                    <Text style={styles.picked_label}>{departureDate ? dayjs(departureDate).format('DD/MM/YYYY') : 'Sélectionner'}</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <View style={[styles.datePicker, { opacity: isDatePickerOpen ? 1 : 0 }]}>
-                                <DateTimePicker
-                                    mode="single"
-                                    date={departureDate}
-                                    onChange={({ date }) => {
-                                        setDepartureDate(date);
-                                        setTimeout(() => {
-                                            setIsDatePickerOpen(false);
-                                        }, 200);
-                                    }}
-                                    style={{
-                                        backgroundColor: colors.white,
-                                        boxShadow: '0px 0px 5px 0px rgba(0, 0, 0, 0.2)',
-                                        borderRadius: 10,
-                                        padding: 10,
-                                        width: 350,
-                                    }}
-                                    styles={{
-                                        ...defaultStyles,
-                                        day_label: {
-                                            color: colors.black,
-                                        },
-                                        day_cell: {
-                                            borderRadius: "50%",
-                                            aspectRatio: 1,
-                                            padding: 4
-                                        },
-                                        selected: {
-                                            backgroundColor: colors.secondary,
-                                            color: colors.white,
-                                            borderRadius: "50%",
-                                        },
-                                        selected_label: {
-                                            color: colors.white,
-                                        },
-                                        today: {
-                                            borderColor: colors.black,
-                                            borderWidth: 1,
-                                            borderRadius: 10,
-                                        },
-                                        today_label: {
-                                            color: colors.black,
-                                        },
-                                        month_selector_label: {
-                                            color: colors.black,
-                                        },
-                                        year_selector_label: {
-                                            color: colors.black,
-                                        },
-                                        button_next_image: {
-                                            tintColor: colors.black,
-                                        },
-                                        button_prev_image: {
-                                            tintColor: colors.black,
-                                        },
 
-
-                                    }}
-                                    locale="fr"
-                                />
-                            </View>
-                        </View>
+                        <DatePicker
+                            departureDate={departureDate}
+                            colors={colors}
+                            labelStyle={styles.pick__label}
+                            isDatePickerOpen={isDatePickerOpen}
+                            setIsDatePickerOpen={setIsDatePickerOpen}
+                            onChange={(date: DateType) => {
+                                setDepartureDate(date);
+                            }}
+                        />
 
                         <View>
                             <Text style={styles.pick__label}>Voyageuses</Text>
@@ -276,14 +218,6 @@ const styles = StyleSheet.create({
     picked_label: {
         fontSize: 14,
         fontWeight: 'bold',
-    },
-    datePicker: {
-        position: 'absolute',
-        zIndex: 20,
-        borderRadius: 10,
-        flex: 1,
-        top: 0,
-        opacity: 0,
     },
     backgroundRoad: {
         position: 'absolute',

@@ -21,6 +21,8 @@ export default function Header({ title, image, supTitle, subtitle, showBackButto
     let animatedHeaderStyle;
     if (scrollOffsetY) {
         animatedHeaderStyle = useAnimatedStyle(() => {
+            // console.log('animatedHeaderStyle', animatedHeaderStyle?.initial?.value?.height);
+
             const height = interpolate(
                 scrollOffsetY.value,
                 [0, layout.headerMaxHeight - layout.headerMinHeight],
@@ -32,7 +34,7 @@ export default function Header({ title, image, supTitle, subtitle, showBackButto
     }
 
     return (
-        <Animated.View style={[styles.header, animatedHeaderStyle]}>
+        <Animated.View style={[styles.header]}>
             <Image source={image} style={styles.image} resizeMode="cover" />
             <View style={styles.textContainer}>
                 {supTitle && <Text style={styles.supTitle}>{supTitle}</Text>}
