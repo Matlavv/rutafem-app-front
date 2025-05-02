@@ -1,3 +1,4 @@
+import Button from '@/components/elements/button';
 import SvgIcon from '@/components/elements/SvgIcon';
 import colors from '@/styles/colors';
 import { router } from 'expo-router';
@@ -83,9 +84,18 @@ export default function ProfileScreen() {
       <Text style={styles.email}>{user.email}</Text>
       <Text style={styles.username}>@{user.username}</Text>
       {!user.verified && (
-        <TouchableOpacity style={styles.verifyBtn} onPress={handleVerification}>
-          <Text style={styles.verifyBtnText}>Verifier mon profil</Text>
-        </TouchableOpacity>
+        <View style={styles.verifyBtnContainer}>
+          <Button
+            onPress={handleVerification}
+            title="Verifier mon profil"
+            color={colors.secondary}
+            disabledColor={colors.secondaryLight}
+            isFixedBottom={true}
+          />
+        </View>
+        // <TouchableOpacity style={styles.verifyBtn} onPress={handleVerification}>
+        //   <Text style={styles.verifyBtnText}>Verifier mon profil</Text>
+        // </TouchableOpacity>
       )}
     </View>
   );
@@ -203,12 +213,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     padding: 2,
   },
-  verifyBtn: {
-    backgroundColor: '#F16134',
-    borderRadius: 12,
-    paddingVertical: 18,
-    paddingHorizontal: 40,
-    marginTop: 16,
+  verifyBtnContainer: {
+    marginTop: 120,
     width: '100%',
     alignItems: 'center',
     alignSelf: 'center',

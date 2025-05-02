@@ -1,5 +1,6 @@
 import { driverCharacter, travelerCharacter } from '@/images';
 import colors from '@/styles/colors';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -55,6 +56,7 @@ export default function ProfilVerificationStart() {
             { backgroundColor: isSelected ? colors.primary : colors.grayLight },
           ]}
           disabled={!isSelected}
+          onPress={() => router.push('/Profile/profilIDCard')}
         >
           <Text style={styles.nextButtonText}>Suivant</Text>
         </TouchableOpacity>
