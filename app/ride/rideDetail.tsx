@@ -13,6 +13,7 @@ import Button from '@/components/elements/button';
 import users_rides from '@/datas/users_rides.json';
 import users from '@/datas/users.json';
 import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
+import colors from '@/styles/colors';
 
 
 export default function RideDetails() {
@@ -154,6 +155,7 @@ export default function RideDetails() {
                     disabled={loading}
                     isFixedBottom={true}
                     style={styles.button}
+                    color={colors.secondary}
                 />
 
             </View>
@@ -291,7 +293,6 @@ const styles = StyleSheet.create({
         marginTop: 8,
         color: '#374151',
     },
-
 
     errorText: {
         color: '#EF4444',

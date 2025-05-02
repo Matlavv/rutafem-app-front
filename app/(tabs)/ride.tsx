@@ -62,13 +62,7 @@ export default function RideScreen() {
                 keyExtractor={(item) => item.id.toString()}
                 ListHeaderComponent={() => (
                     <View style={styles.headerRow}>
-                        <Text style={styles.sectionTitle}>Trajets disponibles</Text>
-                        <TouchableOpacity
-                            onPress={() => router.push('/Ride/createRide')}
-                            style={styles.addButton}
-                        >
-                            <Text style={styles.addButtonText}><SvgIcon name="add" width={26} height={26} strokeColor={colors.white} /></Text>
-                        </TouchableOpacity>
+                        <Text style={styles.sectionTitle}>Trajets disponibles - {rides.length} trajets</Text>
                     </View>
                 )}
                 contentContainerStyle={{
@@ -76,6 +70,12 @@ export default function RideScreen() {
                     paddingHorizontal: 16,
                     paddingBottom: 32,
                 }}
+                stickyHeaderIndices={rides.length > 0 ? [0] : []}
+                StickyHeaderComponent={() => (
+                    <View style={styles.headerRow}>
+                        <Text style={styles.sectionTitle}>Trajets disponibles - {rides.length} trajets</Text>
+                    </View>
+                )}
             />
 
         </View>
