@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
+import { AuthProvider } from '../context/AuthContext';
 import '../global.css';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -59,12 +60,14 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={customTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="light" />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider value={customTheme}>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="light" />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
