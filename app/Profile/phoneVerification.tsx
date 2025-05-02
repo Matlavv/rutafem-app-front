@@ -2,6 +2,7 @@ import { phoneValidated } from '@/assets/images';
 import Button from '@/components/elements/button';
 import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
+import { router } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import {
   Image,
@@ -37,59 +38,54 @@ export default function phoneVerification() {
   const isReady = code.every((c) => c.length === 1);
 
   const handleValidate = () => {
-    setIsValidated(true);
+    if (!isValidated) {
+      setIsValidated(true);
+    } else {
+      router.push('/Profile/profilIdentityVerification');
+    }
   };
 
   return (
     <View style={styles.container}>
       <Stepper currentStep={3} totalSteps={6} />
-      {!isValidated ? (
-        <>
-          <View style={styles.header}>
-            <Text style={styles.title}>Confirme ton téléphone</Text>
-            <Text style={styles.description}>
-              Nous t'avons envoyé un code par SMS.{'\n'}
-              Entre-le ici pour confirmer que ce numéro t'appartient.{'\n'}
-              C'est rapide et ça renforce la sécurité de ton compte.
-            </Text>
+      <View style={styles.header}>
+        <Text style={styles.title}>
+          {!isValidated ? 'Confirme ton téléphone' : 'Numéro Vérifié !'}
+        </Text>
+        <Text style={styles.description}>
+          {!isValidated
+            ? `Nous t'avons envoyé un code par SMS.\nEntre-le ici pour confirmer que ce numéro t'appartient.\nC'est rapide et ça renforce la sécurité de ton compte.`
+            : `Merci ! Ton téléphone est maintenant confirmé. On continue avec les dernières étapes.`}
+        </Text>
+      </View>
+      <View style={styles.centerContent}>
+        {!isValidated ? (
+          <View style={styles.codeRow}>
+            {code.map((digit, idx) => (
+              <React.Fragment key={idx}>
+                {idx === 3 && <Text style={styles.dash}>-</Text>}
+                <TextInput
+                  ref={inputs[idx]}
+                  style={styles.codeInput}
+                  value={digit}
+                  onChangeText={(text) => handleChange(text, idx)}
+                  keyboardType="number-pad"
+                  maxLength={1}
+                  returnKeyType="next"
+                  textAlign="center"
+                  autoFocus={idx === 0}
+                  onSubmitEditing={Keyboard.dismiss}
+                  blurOnSubmit={false}
+                />
+              </React.Fragment>
+            ))}
           </View>
-          <View style={styles.centerContent}>
-            <View style={styles.codeRow}>
-              {code.map((digit, idx) => (
-                <React.Fragment key={idx}>
-                  {idx === 3 && <Text style={styles.dash}>-</Text>}
-                  <TextInput
-                    ref={inputs[idx]}
-                    style={styles.codeInput}
-                    value={digit}
-                    onChangeText={(text) => handleChange(text, idx)}
-                    keyboardType="number-pad"
-                    maxLength={1}
-                    returnKeyType="next"
-                    textAlign="center"
-                    autoFocus={idx === 0}
-                    onSubmitEditing={Keyboard.dismiss}
-                    blurOnSubmit={false}
-                  />
-                </React.Fragment>
-              ))}
-            </View>
-          </View>
-        </>
-      ) : (
-        <>
-          <View style={styles.header}>
-            <Text style={styles.title}>Numéro Vérifié !</Text>
-            <Text style={styles.description}>
-              Merci ! Ton téléphone est maintenant confirmé. On continue avec
-              les dernières étapes.
-            </Text>
-          </View>
+        ) : (
           <View style={styles.validatedContent}>
             <Image source={phoneValidated} style={styles.validatedImage} />
           </View>
-        </>
-      )}
+        )}
+      </View>
       <View style={styles.buttonWrapper}>
         <Button
           title="Suivant"
