@@ -1,110 +1,174 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { canyon } from '@/images';
 import { router } from 'expo-router';
+import colors from '@/styles/colors';
 
-type Ride = {
-    id: number;
-    departure_datetime: string;
-    departure_city: string;
-    arrival_city: string;
-    price: number;
-    availabe_seats: number;
-    starting_adress: string;
-    arrival_adress: string;
-};
+// DATAS
+import usersRidesDatas from '@/datas/users_rides.json';
+import usersDatas from '@/datas/users.json';
+import SvgIcon from '../elements/SvgIcon';
 
 export default function RideCard({ ride }: { ride: Ride }) {
+
+    const driverId = usersRidesDatas.find((user_ride) => user_ride.ride_id === ride.id && user_ride.driver === true);
+    const driver = usersDatas.find((user) => user.id === driverId?.user_id);
+
+    const formattedDate = new Date(ride.departure_datetime).toLocaleDateString('fr-FR');
+
     return (
-        <View style={styles.card}>
-            <TouchableOpacity
-                style={styles.cardContent}
-                onPress={() => {
-                    router.push({
-                        pathname: '/Ride/rideDetail',
-                        params: ride
-                    });
-                }}
-            >
-                <View style={styles.leftContent}>
-                    <Image
-                        source={canyon}
-                        style={styles.image}
-                        resizeMode="cover"
-                    />
-                    <View style={styles.textContainer}>
-                        <View style={styles.destinationContainer}>
-                            <Text style={styles.boldText}>{ride.departure_city}</Text>
-                            <Text style={styles.arrow}>→</Text>
-                            <Text style={styles.boldText}>{ride.arrival_city}</Text>
+        <TouchableOpacity style={styles.card} onPress={() => router.push({ pathname: '/Ride/rideDetail', params: ride })}>
+
+            <View>
+                {/* Avatar */}
+                <Image
+                    source={{ uri: driver?.profile_image_url }}
+                    style={styles.avatar}
+                    resizeMode="cover"
+                />
+            </View>
+
+            <View style={styles.rightContainer}>
+                <View style={styles.rowTop}>
+
+                    {/* Ride info */}
+                    <View style={styles.rideInfoContainer}>
+                        <View style={styles.citiesRow}>
+                            <View style={styles.visualCol}>
+                                <View style={styles.visualDot} />
+                                <View style={styles.visualLine} />
+                                <View style={styles.visualDot} />
+                            </View>
+                            <View style={styles.citiesCol}>
+                                <Text style={styles.cityText}>{ride.departure_city}</Text>
+                                <Text style={styles.cityText}>{ride.arrival_city}</Text>
+                            </View>
                         </View>
-                        <Text style={styles.grayText}>
-                            {new Date(ride.departure_datetime).toLocaleDateString(
-                                'fr-FR',
-                            )}{' '}
-                            -{' '}
-                            {new Date(ride.departure_datetime).toLocaleTimeString(
-                                'fr-FR',
-                                { hour: '2-digit', minute: '2-digit' },
-                            )}
-                        </Text>
-                        <Text style={styles.grayText}>
-                            {ride.availabe_seats} place
-                            {ride.availabe_seats > 1 ? 's' : ''} disponible
-                            {ride.availabe_seats > 1 ? 's' : ''}
-                        </Text>
+                    </View>
+                    {/* Price and date */}
+                    <View style={styles.priceCol}>
+                        <Text style={styles.priceText}>{Number.isInteger(ride.price) ? ride.price : ride.price.toFixed(2)}€</Text>
+                        <Text style={styles.dateText}>{formattedDate}</Text>
                     </View>
                 </View>
-                <Text style={styles.price}>{(ride.price / 100).toFixed(2)}€</Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
 
+                <View style={styles.separator} />
+
+                <View style={styles.rowBottom}>
+                    <View>
+                        <Text style={styles.driverName}>{driver?.firstname} {driver?.lastname}</Text>
+                    </View>
+                    <View style={styles.ratingRow}>
+                        <Text style={styles.ratingText}>{driver?.rating ?? 4.5}</Text>
+                        <SvgIcon name="star" width={16} height={16} fillColor="#FFBA00" />
+                    </View>
+                </View>
+
+            </View>
+
+        </TouchableOpacity>
+    );
+};
 
 const styles = StyleSheet.create({
     card: {
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        borderRadius: 24,
         padding: 16,
-        borderRadius: 16,
-        marginVertical: 6,
-        boxShadow: '0px 0px 5px 0px rgba(0, 0, 0, 0.2)',
-        marginHorizontal: 3,
+        marginVertical: 8,
+        marginHorizontal: 4,
+        boxShadow: '0px 0px 10px #00000021',
     },
-    cardContent: {
+    rightContainer: {
+        flex: 1,
+    },
+    rowTop: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        width: '100%',
+        marginBottom: 8,
     },
-    leftContent: {
+    avatar: {
+        width: 65,
+        height: 65,
+        borderRadius: 36,
+        marginRight: 16,
+    },
+    rideInfoContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    citiesRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 16,
     },
-    image: {
-        height: 60,
-        width: 60,
-        borderRadius: 12,
+    visualCol: {
+        alignItems: 'center',
+        marginRight: 8,
     },
-    textContainer: {
+    visualDot: {
+        width: 6,
+        height: 6,
+        borderRadius: 4,
+        backgroundColor: colors.gray,
+    },
+    visualLine: {
+        width: 1,
+        height: 18,
+        backgroundColor: colors.gray,
+    },
+    citiesCol: {
+        justifyContent: 'space-between',
         gap: 4,
     },
-    destinationContainer: {
-        flexDirection: 'row',
-        gap: 8,
-    },
-    boldText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    arrow: {
-        fontSize: 18,
-    },
-    grayText: {
-        color: '#6B7280',
-    },
-    price: {
+    cityText: {
+        fontFamily: 'Inter',
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: 500,
+        color: '#111827',
+    },
+    priceCol: {
+        alignItems: 'flex-end',
+        minWidth: 80,
+    },
+    priceText: {
+        fontSize: 20,
+        fontWeight: 600,
+    },
+    dateText: {
+        fontSize: 14,
+        marginTop: 4,
+    },
+    separator: {
+        height: 1,
+        backgroundColor: '#E5E7EB',
+        marginVertical: 10,
+        borderRadius: 1,
+    },
+    rowBottom: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    driverName: {
+        fontSize: 18,
+        fontWeight: 600,
+        color: '#111827',
+        flex: 1,
+    },
+    ratingRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
+    },
+    star: {
+        color: '#FBBF24',
+        fontSize: 20,
+        marginRight: 2,
+    },
+    ratingText: {
+        fontSize: 14,
+        color: '#111827',
+        fontWeight: '500',
     },
 });

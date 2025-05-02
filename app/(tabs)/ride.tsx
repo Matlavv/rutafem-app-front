@@ -1,62 +1,97 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { router } from 'expo-router';
-import RideCard from '@/components/card/RideCard';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
+import { router, useLocalSearchParams } from 'expo-router';
+
+// COMPONENTS
 import Header from '@/components/header';
-import rides from '@/datas/rides.json';
-import { canyon } from '@/images';
-import colors from '@/styles/colors';
+import RideCard from '@/components/card/RideCard';
 import SvgIcon from '@/components/elements/SvgIcon';
+import { mountain, canyon } from '@/images';
+
+// STYLES
+import layout from '@/styles/layout';
+import colors from '@/styles/colors';
+
+// DATAS (temporary)
+import ridesDatas from '@/datas/rides.json';
+
 
 
 export default function RideScreen() {
+
+    const params = useLocalSearchParams();
+
+
+    const scrollOffsetY = useSharedValue(0);
+
+    const onScroll = useAnimatedScrollHandler({
+        onScroll: (event) => {
+            scrollOffsetY.value = event.contentOffset.y;
+        },
+    });
+
+    let rides;
+    if (params.departurePosition && params.arrivalPosition && params.departureDate) {
+        console.log(params.departurePosition, params.arrivalPosition, params.departureDate);
+        console.log(ridesDatas);
+
+        rides = ridesDatas.filter((ride) => {
+            return ride.departure_city === params.departurePosition && ride.arrival_city === params.arrivalPosition && ride.departure_datetime >= params.departureDate;
+        });
+    } else {
+        rides = ridesDatas;
+    }
+
     return (
-        <View>
-            <Header title="RutaFem" image={canyon} showBackButton={false} />
-            <View style={styles.contentContainer}>
-                <View style={styles.headerRow}>
-                    <Text style={styles.sectionTitle}>Trajets disponibles</Text>
-                    <TouchableOpacity
-                        onPress={() => router.push('/Ride/createRide')}
-                        style={styles.addButton}
-                    >
-                        <Text style={styles.addButtonText}><SvgIcon name="add" width={26} height={26} strokeColor={colors.white} /></Text>
-                    </TouchableOpacity>
-                </View>
-                <ScrollView style={styles.listContainer}>
-                    {rides.rides.map((ride) => (
-                        <RideCard ride={ride} key={ride.id} />
-                    ))}
-                </ScrollView>
-            </View>
+        <View style={{ flex: 1 }}>
+
+            <Header
+                title="RutaFem"
+                image={mountain}
+                showBackButton={false}
+                scrollOffsetY={scrollOffsetY}
+                supTitle={params.departurePosition ? `${params.departurePosition} - ${params.arrivalPosition}` : ''}
+                subtitle={rides.length > 0 ? `${rides.length} trajets disponibles` : 'Aucun trajet disponible'}
+            />
+
+            <Animated.FlatList
+                onScroll={onScroll}
+                scrollEventThrottle={16}
+                data={rides}
+                renderItem={({ item }) => <RideCard ride={item} key={item.id} />}
+                keyExtractor={(item) => item.id.toString()}
+                ListHeaderComponent={() => (
+                    <View style={styles.headerRow}>
+                        <Text style={styles.sectionTitle}>Trajets disponibles - {rides.length} trajets</Text>
+                    </View>
+                )}
+                contentContainerStyle={{
+                    paddingTop: layout.headerMaxHeight + 16,
+                    paddingHorizontal: 16,
+                    paddingBottom: 32,
+                }}
+                stickyHeaderIndices={rides.length > 0 ? [0] : []}
+                StickyHeaderComponent={() => (
+                    <View style={styles.headerRow}>
+                        <Text style={styles.sectionTitle}>Trajets disponibles - {rides.length} trajets</Text>
+                    </View>
+                )}
+            />
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    headerContainer: {
-        position: 'relative',
-    },
-    headerImage: {
-        height: 400,
-        width: '100%',
-        opacity: 0.8,
-    },
-    titleContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     contentContainer: {
-        margin: 16,
+        marginHorizontal: 16,
+        flex: 1,
     },
     headerRow: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginBottom: 16,
     },
     sectionTitle: {
         fontSize: 20,
@@ -76,12 +111,5 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: '#FFFFFF',
-    },
-    listContainer: {
-        marginTop: 16,
-    },
-    rideContainer: {
-        flex: 1,
-        height: 500,
     },
 });

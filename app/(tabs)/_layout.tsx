@@ -45,24 +45,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name="ride"
         options={{
-          title: 'Voyager',
+          title: 'Trajets',
           tabBarIcon: ({ color }: { color: string }) => (
             <SvgIcon name="car" width={24} height={24} fillColor={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="message"
+        name="create"
         options={{
-          title: 'Messagerie',
-          tabBarIcon: ({
-            color,
-            focused,
-          }: {
-            color: string;
-            focused: boolean;
-          }) => (
-            <SvgIcon name="message" width={24} height={24} fillColor={color} />
+          title: 'Créer',
+          tabBarIcon: ({ color }: { color: string }) => (
+            <SvgIcon name="addRide" width={24} height={24} fillColor={color} />
           ),
         }}
       />
@@ -72,6 +66,15 @@ export default function TabLayout() {
           title: 'Profil',
           tabBarIcon: ({ color }: { color: string }) => (
             <SvgIcon name="profile" width={24} height={24} fillColor={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="message"
+        options={{
+          title: 'Messagerie',
+          tabBarIcon: ({ color }: { color: string }) => (
+            <SvgIcon name="message" width={24} height={24} fillColor={color} />
           ),
         }}
       />
