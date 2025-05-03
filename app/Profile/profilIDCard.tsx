@@ -1,14 +1,16 @@
-import { idCharacter } from '@/assets/images';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { router } from 'expo-router';
 import Button from '@/components/elements/button';
 import SvgIcon from '@/components/elements/SvgIcon';
 import { ButtonRectoVerso } from '@/components/profile/ButtonRectoVerso';
 import { Stepper } from '@/components/profile/Stepper';
+import { idCharacter } from '@/assets/images';
 import colors from '@/styles/colors';
-import { router } from 'expo-router';
-import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+
 
 export default function profilIDCard() {
+
   const [recto, setRecto] = useState<{ name: string; loaded: boolean } | null>(
     null,
   );
@@ -26,7 +28,7 @@ export default function profilIDCard() {
   const isReady = recto?.loaded && verso?.loaded;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stepper currentStep={1} totalSteps={6} />
       <View style={styles.content}>
         <Text style={styles.title}>Carte d'identité</Text>
@@ -69,24 +71,21 @@ export default function profilIDCard() {
             ))}
           </View>
         )}
-        <View style={[styles.buttonContainer, { marginTop: 36 }]}>
-          <ButtonRectoVerso
-            onPressRecto={handleUploadRecto}
-            onPressVerso={handleUploadVerso}
-          />
-        </View>
-      </View>
-      <View style={[styles.buttonContainer, { marginBottom: 48 }]}>
-        <Button
-          title="Continuer"
-          onPress={() => router.push('/Profile/profilUserInformation')}
-          color={colors.primary}
-          isFixedBottom={true}
-          disabledColor={colors.grayLight}
-          disabled={!isReady}
+        <ButtonRectoVerso
+          onPressRecto={handleUploadRecto}
+          onPressVerso={handleUploadVerso}
         />
       </View>
-    </View>
+      <Button
+        title="Continuer"
+        onPress={() => router.push('/Profile/profilUserInformation')}
+        color={colors.primary}
+        isFixedBottom={true}
+        disabledColor={colors.grayLight}
+        style={styles.nextButton}
+        disabled={!isReady}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: 24,
+    margin: 24,
     paddingTop: 24,
     paddingBottom: 0,
     marginTop: 24,
@@ -157,8 +156,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontWeight: '500',
   },
-  buttonContainer: {
-    paddingHorizontal: 24,
-    paddingBottom: 24,
+  nextButton: {
+    marginBottom: 24,
   },
 });

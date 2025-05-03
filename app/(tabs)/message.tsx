@@ -1,9 +1,16 @@
-import { Text, View } from 'react-native';
+import { Text, SafeAreaView, StyleSheet } from 'react-native';
 
 export default function MessageScreen() {
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <Text>Message</Text>
-    </View>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 24,
+  },
+});

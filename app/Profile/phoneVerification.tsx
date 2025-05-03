@@ -1,19 +1,14 @@
-import { phoneValidated } from '@/assets/images';
+import { Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { router } from 'expo-router';
 import Button from '@/components/elements/button';
 import { Stepper } from '@/components/profile/Stepper';
+import { phoneValidated } from '@/assets/images';
 import colors from '@/styles/colors';
-import { router } from 'expo-router';
-import React, { useRef, useState } from 'react';
-import {
-  Image,
-  Keyboard,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+
 
 export default function phoneVerification() {
+
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const [isValidated, setIsValidated] = useState(false);
   const inputs = [
@@ -46,7 +41,7 @@ export default function phoneVerification() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stepper currentStep={3} totalSteps={6} />
       <View style={styles.header}>
         <Text style={styles.title}>
@@ -86,16 +81,17 @@ export default function phoneVerification() {
           </View>
         )}
       </View>
-      <View style={styles.buttonWrapper}>
-        <Button
-          title="Suivant"
-          onPress={handleValidate}
-          color={colors.primary}
-          disabledColor={colors.grayLight}
-          disabled={!isReady && !isValidated}
-        />
-      </View>
-    </View>
+
+      <Button
+        title="Suivant"
+        onPress={handleValidate}
+        color={colors.primary}
+        disabledColor={colors.grayLight}
+        disabled={!isReady && !isValidated}
+        isFixedBottom={true}
+        style={styles.nextButton}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -104,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 24,
     backgroundColor: colors.background,
-    paddingHorizontal: 24,
+    marginHorizontal: 24,
     paddingTop: 0,
     justifyContent: 'flex-start',
   },
@@ -172,12 +168,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     fontWeight: 'bold',
   },
-  buttonWrapper: {
-    width: '100%',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 50,
-    paddingHorizontal: 24,
+  nextButton: {
+    marginBottom: 24,
   },
 });

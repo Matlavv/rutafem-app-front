@@ -1,16 +1,19 @@
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { router } from 'expo-router';
+import Button from '@/components/elements/button';
 import { driverCharacter, travelerCharacter } from '@/images';
 import colors from '@/styles/colors';
-import { router } from 'expo-router';
-import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 
 export default function ProfilVerificationStart() {
+
   const [selected, setSelected] = useState<'driver' | 'traveler' | null>(null);
 
   const isSelected = selected !== null;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Vérifier mon profil</Text>
       <Text style={styles.description}>
         Pour garantir des voyages en toute sécurité et instaurer une vraie
@@ -18,6 +21,7 @@ export default function ProfilVerificationStart() {
         indispensable. Elle ne prend que quelques instants.
       </Text>
       <View style={styles.choicesColumn}>
+
         <TouchableOpacity
           style={[
             styles.buttonContainer,
@@ -33,6 +37,7 @@ export default function ProfilVerificationStart() {
             <Text style={styles.buttonText}>Je suis conductrice</Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={[
             styles.buttonContainer,
@@ -49,19 +54,19 @@ export default function ProfilVerificationStart() {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={styles.nextButtonContainer}>
-        <TouchableOpacity
-          style={[
-            styles.nextButton,
-            { backgroundColor: isSelected ? colors.primary : colors.grayLight },
-          ]}
-          disabled={!isSelected}
-          onPress={() => router.push('/Profile/profilIDCard')}
-        >
-          <Text style={styles.nextButtonText}>Suivant</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      <Button
+        title="Suivant"
+        onPress={() => router.push('/Profile/profilIDCard')}
+        color={colors.primary}
+        isFixedBottom={true}
+        disabledColor={colors.grayLight}
+        disabled={!isSelected}
+        style={[
+          styles.nextButton,
+          { backgroundColor: isSelected ? colors.primary : colors.grayLight },
+        ]}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    padding: 24,
+    margin: 24,
   },
   title: {
     fontSize: 30,
@@ -98,7 +103,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    flex: 1,
     shadowColor: colors.black,
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.15,
@@ -119,23 +123,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
-  nextButtonContainer: {
-    marginTop: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    width: '100%',
-  },
   nextButton: {
     width: '100%',
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
-  },
-  nextButtonText: {
-    color: colors.white,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    marginBottom: 24,
   },
 });

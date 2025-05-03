@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent, ViewStyle, StyleProp } from 'react-native';
 import colors from '@/styles/colors';
 
 interface ButtonProps {
@@ -8,7 +8,7 @@ interface ButtonProps {
     color?: string;
     isFixedBottom?: boolean;
     disabledColor?: string;
-    style?: ViewStyle;
+    style?: StyleProp<ViewStyle>;
 }
 
 export default function Button({ style, title, onPress, disabled = false, disabledColor, color = colors.primary, isFixedBottom = false }: ButtonProps) {

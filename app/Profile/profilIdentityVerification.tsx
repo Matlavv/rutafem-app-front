@@ -1,35 +1,39 @@
-import { faceConfirmation } from '@/assets/images';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { router } from 'expo-router';
 import Button from '@/components/elements/button';
 import { Stepper } from '@/components/profile/Stepper';
+import { faceConfirmation } from '@/assets/images';
 import colors from '@/styles/colors';
-import { router } from 'expo-router';
-import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+
 
 export default function profilIdentityVerification() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+
       <Stepper currentStep={4} totalSteps={6} />
+
       <View style={styles.content}>
         <Text style={styles.title}>Confirme ton identité</Text>
         <Text style={styles.description}>
-          Regarde la caméra, dis bonjour et c’est tout ! Cette courte vidéo nous
+          Regarde la caméra, dis bonjour et c'est tout ! Cette courte vidéo nous
           aide à protéger tous les voyageurs en vérifiant ton identité. Tes
           données sont chiffrées et strictement confidentielles.
         </Text>
         <Image source={faceConfirmation} style={styles.image} />
         <View style={styles.uploadRow}></View>
       </View>
-      <View style={[styles.buttonContainer, { marginBottom: 48 }]}>
-        <Button
-          title="Continuer"
-          onPress={() => router.push('/Profile/profilUserInformation')}
-          color={colors.primary}
-          isFixedBottom={true}
-          disabledColor={colors.grayLight}
-        />
-      </View>
-    </View>
+
+      <Button
+        title="Continuer"
+        onPress={() => router.push('/Profile/profilUserInformation')}
+        color={colors.primary}
+        isFixedBottom={true}
+        disabledColor={colors.grayLight}
+        style={styles.nextButton}
+      />
+
+    </SafeAreaView>
   );
 }
 
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: 24,
+    marginHorizontal: 24,
     paddingTop: 24,
     paddingBottom: 0,
     marginTop: 24,
@@ -100,8 +104,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontWeight: '500',
   },
-  buttonContainer: {
-    paddingHorizontal: 24,
-    paddingBottom: 24,
+  nextButton: {
+    marginBottom: 24,
   },
 });

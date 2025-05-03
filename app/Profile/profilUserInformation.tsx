@@ -1,19 +1,14 @@
+import { Platform, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { router } from 'expo-router';
 import Button from '@/components/elements/button';
 import SvgIcon from '@/components/elements/SvgIcon';
 import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
-import { router } from 'expo-router';
-import React, { useState } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+
 
 export default function profilUserInformation() {
+
   const [birthDate, setBirthDate] = useState('');
   const [rue, setRue] = useState('');
   const [numero, setNumero] = useState('');
@@ -41,7 +36,7 @@ export default function profilUserInformation() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stepper currentStep={2} totalSteps={6} />
       <View style={styles.content}>
         <Text style={styles.title}>Tes informations</Text>
@@ -157,17 +152,17 @@ export default function profilUserInformation() {
           />
         </View>
       </View>
-      <View style={[styles.buttonContainer, { marginBottom: 48 }]}>
-        <Button
-          title="Continuer"
-          onPress={() => router.push('/Profile/phoneVerification')}
-          color={colors.primary}
-          isFixedBottom={true}
-          disabledColor={colors.grayLight}
-          disabled={!isReady}
-        />
-      </View>
-    </View>
+
+      <Button
+        title="Continuer"
+        onPress={() => router.push('/Profile/phoneVerification')}
+        color={colors.primary}
+        isFixedBottom={true}
+        disabledColor={colors.grayLight}
+        style={styles.nextButton}
+        disabled={!isReady}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -175,7 +170,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: 24,
+    margin: 24,
     paddingTop: 24,
     paddingBottom: 0,
     marginTop: 24,
@@ -263,8 +258,7 @@ const styles = StyleSheet.create({
     minWidth: 0,
     maxWidth: '48%',
   },
-  buttonContainer: {
-    paddingHorizontal: 24,
-    paddingBottom: 24,
+  nextButton: {
+    marginBottom: 24,
   },
 });

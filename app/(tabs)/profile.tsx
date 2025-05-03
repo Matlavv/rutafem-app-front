@@ -33,7 +33,7 @@ export default function ProfileScreen() {
         <View>
           <SvgIcon
             name="profile"
-            width={160}
+            width={170}
             height={160}
             strokeColor="#3B3B3D"
             strokeWidth={0.5}
