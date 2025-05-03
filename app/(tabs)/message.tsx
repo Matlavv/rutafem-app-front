@@ -1,15 +1,16 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SvgIcon from '@/components/elements/SvgIcon';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 export default function MessageScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <MaterialCommunityIcons
-                    name="code-braces"
-                    size={80}
-                    color="#6B7280"
-                    style={styles.icon}
+                <SvgIcon
+                    name="cross"
+                    width={170}
+                    height={160}
+                    strokeColor="#3B3B3D"
+                    strokeWidth={0.5}
                 />
                 <Text style={styles.title}>En cours de développement</Text>
                 <Text style={styles.description}>
