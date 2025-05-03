@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { router, useLocalSearchParams } from 'expo-router';
 import { mountain } from '@/assets/images';
 import Button from '@/components/elements/button';
 import Header from '@/components/header';
 import colors from '@/styles/colors';
 import layout from '@/styles/layout';
-
+import { router, useLocalSearchParams } from 'expo-router';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 export default function CreateConfirmation() {
-
     const [loading, setLoading] = useState(false);
 
     const params = useLocalSearchParams();
@@ -32,18 +30,11 @@ export default function CreateConfirmation() {
         }, 1000);
     };
 
-
     return (
-        <View style={{ flex: 1 }}>
-
-            <Header
-                title="Créer un trajet"
-                image={mountain}
-                showBackButton={false}
-            />
+        <SafeAreaView style={{ flex: 1 }}>
+            <Header title="Créer un trajet" image={mountain} showBackButton={false} />
 
             <View style={styles.container}>
-
                 {/* Steps */}
                 <View style={styles.stepsContainer}>
                     <View style={styles.inactiveStep}>
@@ -93,10 +84,8 @@ export default function CreateConfirmation() {
                     color={colors.secondary}
                     disabled={loading}
                 />
-
             </View>
-
-        </View>
+        </SafeAreaView>
     );
 }
 
