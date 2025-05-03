@@ -1,26 +1,21 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 
 // COMPONENTS
-import Header from '@/components/header';
 import RideCard from '@/components/card/RideCard';
-import SvgIcon from '@/components/elements/SvgIcon';
-import { mountain, canyon } from '@/images';
+import Header from '@/components/header';
+import { mountain } from '@/images';
 
 // STYLES
-import layout from '@/styles/layout';
 import colors from '@/styles/colors';
+import layout from '@/styles/layout';
 
 // DATAS (temporary)
 import ridesDatas from '@/datas/rides.json';
 
-
-
 export default function RideScreen() {
-
     const params = useLocalSearchParams();
-
 
     const scrollOffsetY = useSharedValue(0);
 
@@ -36,22 +31,33 @@ export default function RideScreen() {
         console.log(ridesDatas);
 
         rides = ridesDatas.filter((ride) => {
-            return ride.departure_city === params.departurePosition && ride.arrival_city === params.arrivalPosition && ride.departure_datetime >= params.departureDate;
+            return (
+                ride.departure_city === params.departurePosition &&
+                ride.arrival_city === params.arrivalPosition &&
+                ride.departure_datetime >= params.departureDate
+            );
         });
     } else {
         rides = ridesDatas;
     }
 
     return (
-        <View style={{ flex: 1 }}>
-
+        <SafeAreaView style={{ flex: 1 }}>
             <Header
                 title="RutaFem"
                 image={mountain}
                 showBackButton={false}
                 scrollOffsetY={scrollOffsetY}
-                supTitle={params.departurePosition ? `${params.departurePosition} - ${params.arrivalPosition}` : ''}
-                subtitle={rides.length > 0 ? `${rides.length} trajets disponibles` : 'Aucun trajet disponible'}
+                supTitle={
+                    params.departurePosition
+                        ? `${params.departurePosition} - ${params.arrivalPosition}`
+                        : ''
+                }
+                subtitle={
+                    rides.length > 0
+                        ? `${rides.length} trajets disponibles`
+                        : 'Aucun trajet disponible'
+                }
             />
 
             <Animated.FlatList
@@ -62,7 +68,9 @@ export default function RideScreen() {
                 keyExtractor={(item) => item.id.toString()}
                 ListHeaderComponent={() => (
                     <View style={styles.headerRow}>
-                        <Text style={styles.sectionTitle}>Trajets disponibles - {rides.length} trajets</Text>
+                        <Text style={styles.sectionTitle}>
+                            Trajets disponibles - {rides.length} trajets
+                        </Text>
                     </View>
                 )}
                 contentContainerStyle={{
@@ -73,12 +81,13 @@ export default function RideScreen() {
                 stickyHeaderIndices={rides.length > 0 ? [0] : []}
                 StickyHeaderComponent={() => (
                     <View style={styles.headerRow}>
-                        <Text style={styles.sectionTitle}>Trajets disponibles - {rides.length} trajets</Text>
+                        <Text style={styles.sectionTitle}>
+                            Trajets disponibles - {rides.length} trajets
+                        </Text>
                     </View>
                 )}
             />
-
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -107,7 +116,7 @@ const styles = StyleSheet.create({
         borderRadius: 24,
     },
     addButtonText: {
-        display: "flex",
+        display: 'flex',
         fontSize: 24,
         fontWeight: 'bold',
         color: '#FFFFFF',

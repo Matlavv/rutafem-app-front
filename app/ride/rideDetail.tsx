@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { router, useLocalSearchParams } from 'expo-router';
 import { canyon } from '@/images';
 import layout from '@/styles/layout';
+import { router, useLocalSearchParams } from 'expo-router';
+import React, { useState } from 'react';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 // COMPONENTS
-import Header from '@/components/header';
 import SvgIcon from '@/components/elements/SvgIcon';
 import Button from '@/components/elements/button';
+import Header from '@/components/header';
 
 // DATAS
-import users_rides from '@/datas/users_rides.json';
 import users from '@/datas/users.json';
-import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
+import users_rides from '@/datas/users_rides.json';
 import colors from '@/styles/colors';
-
+import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 
 export default function RideDetails() {
     const params = useLocalSearchParams();
@@ -31,11 +30,15 @@ export default function RideDetails() {
         }, 1000);
     };
 
-    const driverId = users_rides.find(user => user.ride_id === parseInt(params.id as string) && user.driver === true)?.user_id;
-    const driver = users.find(user => user.id === driverId);
+    const driverId = users_rides.find(
+        (user) => user.ride_id === parseInt(params.id as string) && user.driver === true,
+    )?.user_id;
+    const driver = users.find((user) => user.id === driverId);
 
-    const passengersIds = users_rides.filter(user => user.ride_id === parseInt(params.id as string) && user.driver === false).map(user => user.user_id);
-    const passengers = users.filter(user => passengersIds.includes(user.id));
+    const passengersIds = users_rides
+        .filter((user) => user.ride_id === parseInt(params.id as string) && user.driver === false)
+        .map((user) => user.user_id);
+    const passengers = users.filter((user) => passengersIds.includes(user.id));
 
     console.log(passengersIds);
     console.log(passengers);
@@ -49,12 +52,16 @@ export default function RideDetails() {
     });
 
     return (
-        <View style={styles.rideDetail}>
-
-            <Header supTitle="Ton voyage à" title={params.arrival_city as string} subtitle="est presque prêt" image={canyon} scrollOffsetY={scrollOffsetY} />
+        <SafeAreaView style={styles.rideDetail}>
+            <Header
+                supTitle="Ton voyage à"
+                title={params.arrival_city as string}
+                subtitle="est presque prêt"
+                image={canyon}
+                scrollOffsetY={scrollOffsetY}
+            />
 
             <View style={styles.contentContainer}>
-
                 <Animated.ScrollView
                     showsVerticalScrollIndicator={false}
                     scrollEventThrottle={16}
@@ -62,12 +69,12 @@ export default function RideDetails() {
                     contentContainerStyle={{
                         paddingTop: layout.headerMaxHeight + 16,
                     }}
-
                 >
-
                     <View style={styles.rideCard}>
                         <View style={styles.rideCard__header}>
-                            <Text style={styles.rideCard__header_city}>{params.departure_city}</Text>
+                            <Text style={styles.rideCard__header_city}>
+                                {params.departure_city}
+                            </Text>
 
                             <View style={styles.rideCard__visual}>
                                 <View style={styles.rideCard__visual_circle} />
@@ -79,7 +86,11 @@ export default function RideDetails() {
                         </View>
 
                         <View style={styles.rideCard__info}>
-                            <Text style={styles.rideCard__info_date}>{new Date(params.departure_datetime as string).toLocaleDateString('fr-FR')}</Text>
+                            <Text style={styles.rideCard__info_date}>
+                                {new Date(params.departure_datetime as string).toLocaleDateString(
+                                    'fr-FR',
+                                )}
+                            </Text>
                             <Text style={styles.rideCard__info_price}>{params.price} €</Text>
                         </View>
                     </View>
@@ -88,8 +99,12 @@ export default function RideDetails() {
                         <View style={styles.driverCard}>
                             <View style={styles.driverCard__left}>
                                 <View>
-                                    <Text style={styles.driverCard__header_label}>Ta conductrice</Text>
-                                    <Text style={styles.driverCard__header_name}>{driver?.firstname} {driver?.lastname}</Text>
+                                    <Text style={styles.driverCard__header_label}>
+                                        Ta conductrice
+                                    </Text>
+                                    <Text style={styles.driverCard__header_name}>
+                                        {driver?.firstname} {driver?.lastname}
+                                    </Text>
                                     <View style={styles.driverCard__header_stars}>
                                         {Array.from({ length: 5 }).map((_, i) => {
                                             const rating = driver?.rating ?? 0;
@@ -99,17 +114,16 @@ export default function RideDetails() {
                                             return (
                                                 <SvgIcon
                                                     key={i}
-                                                    name={half ? "starHalf" : "star"}
+                                                    name={half ? 'starHalf' : 'star'}
                                                     width={15}
                                                     height={15}
-                                                    fillColor={full || half ? "#FFBA00" : "#BDBDBD"}
-                                                    strokeColor={"#BDBDBD"}
+                                                    fillColor={full || half ? '#FFBA00' : '#BDBDBD'}
+                                                    strokeColor={'#BDBDBD'}
                                                     strokeWidth={0}
                                                 />
                                             );
                                         })}
                                     </View>
-
                                 </View>
 
                                 <View style={styles.vehicleInfo}>
@@ -128,9 +142,10 @@ export default function RideDetails() {
                                             />
                                         ))}
                                     </View>
-                                    <Text style={styles.reservedInfo}>{passengers.length} voyageuses ont réservé ce voyage</Text>
+                                    <Text style={styles.reservedInfo}>
+                                        {passengers.length} voyageuses ont réservé ce voyage
+                                    </Text>
                                 </View>
-
                             </View>
                             <View style={styles.driverImageContainer}>
                                 <Image
@@ -141,12 +156,10 @@ export default function RideDetails() {
                                     <Text style={{ fontSize: 24 }}>📸 👍 🎵</Text>
                                 </View>
                             </View>
-
                         </View>
                     )}
 
                     {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
                 </Animated.ScrollView>
 
                 <Button
@@ -157,15 +170,12 @@ export default function RideDetails() {
                     style={styles.button}
                     color={colors.secondary}
                 />
-
             </View>
-
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-
     // RideDetail
     rideDetail: {
         flex: 1,
@@ -302,5 +312,4 @@ const styles = StyleSheet.create({
     button: {
         marginHorizontal: 16,
     },
-
 });

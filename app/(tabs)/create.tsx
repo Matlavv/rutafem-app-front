@@ -1,28 +1,23 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 
 // COMPONENTS
 import Header from '@/components/header';
-import RideCard from '@/components/card/RideCard';
-import SvgIcon from '@/components/elements/SvgIcon';
-import { mountain, canyon } from '@/images';
+import { mountain } from '@/images';
 
 // STYLES
-import layout from '@/styles/layout';
 import colors from '@/styles/colors';
+import layout from '@/styles/layout';
 
 // DATAS (temporary)
-import ridesDatas from '@/datas/rides.json';
 import Button from '@/components/elements/button';
-import { DateType } from 'react-native-ui-datepicker';
 import DatePicker from '@/components/elements/datePicker';
 import dayjs from 'dayjs';
-
+import { DateType } from 'react-native-ui-datepicker';
 
 export default function CreateScreen() {
-
     const [departurePosition, setDeparturePosition] = useState('');
     const [arrivalPosition, setArrivalPosition] = useState('');
     const [departureDate, setDepartureDate] = useState<DateType>();
@@ -30,7 +25,6 @@ export default function CreateScreen() {
     const [availableSeats, setAvailableSeats] = useState('');
     const [departureTime, setDepartureTime] = useState('');
     const [price, setPrice] = useState('');
-
 
     const [isDepartureDatePickerOpen, setIsDepartureDatePickerOpen] = useState(false);
     const [isArrivalDatePickerOpen, setIsArrivalDatePickerOpen] = useState(false);
@@ -87,10 +81,8 @@ export default function CreateScreen() {
         setIsArrivalDatePickerOpen(false);
     };
 
-
     return (
         <TouchableWithoutFeedback onPress={handleOutsideClick}>
-
             <View style={styles.container}>
                 {/* Header */}
                 <Header
@@ -108,20 +100,20 @@ export default function CreateScreen() {
                         paddingBottom: 32,
                         gap: 16,
                     }}
-                // stickyHeaderIndices={[0]}
-                // StickyHeaderComponent={() => (
-                //     <View style={styles.stepsContainer}>
-                //         <View style={styles.activeStep}>
-                //             <Text style={styles.stepText}>1</Text>
-                //         </View>
-                //         <View style={styles.stepLine} />
-                //         <View style={styles.inactiveStep}>
-                //             <Text style={styles.stepText}>2</Text>
-                //         </View>
-                //     </View>
-                // )}
+                    showsVerticalScrollIndicator={false}
+                    // stickyHeaderIndices={[0]}
+                    // StickyHeaderComponent={() => (
+                    //     <View style={styles.stepsContainer}>
+                    //         <View style={styles.activeStep}>
+                    //             <Text style={styles.stepText}>1</Text>
+                    //         </View>
+                    //         <View style={styles.stepLine} />
+                    //         <View style={styles.inactiveStep}>
+                    //             <Text style={styles.stepText}>2</Text>
+                    //         </View>
+                    //     </View>
+                    // )}
                 >
-
                     <View style={styles.stepsContainer}>
                         <View style={styles.activeStep}>
                             <Text style={styles.stepText}>1</Text>
@@ -155,7 +147,6 @@ export default function CreateScreen() {
                         />
                     </View>
 
-
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 30 }}>
                         <DatePicker
                             departureDate={departureDate}
@@ -179,9 +170,6 @@ export default function CreateScreen() {
                             }}
                         />
                     </View>
-
-
-
 
                     <View style={styles.inputGroup}>
                         <Text style={styles.label}>Heure</Text>
@@ -226,8 +214,6 @@ export default function CreateScreen() {
                         disabled={loading}
                         color={colors.secondary}
                     />
-
-
                 </Animated.ScrollView>
             </View>
         </TouchableWithoutFeedback>

@@ -1,4 +1,4 @@
-import { faceConfirmation } from '@/assets/images';
+import { carVerification } from '@/assets/images';
 import Button from '@/components/elements/button';
 import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
@@ -6,25 +6,24 @@ import { router } from 'expo-router';
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-export default function profilIdentityVerification() {
+export default function carVerificationStart() {
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={4} totalSteps={6} />
+            <Stepper currentStep={5} totalSteps={6} />
 
             <View style={styles.content}>
-                <Text style={styles.title}>Confirme ton identité</Text>
+                <Text style={styles.title}>Vérifie ton véhicule</Text>
                 <Text style={styles.description}>
-                    Regarde la caméra, dis bonjour et c'est tout ! Cette courte vidéo nous aide à
-                    protéger tous les voyageurs en vérifiant ton identité. Tes données sont
-                    chiffrées et strictement confidentielles.
+                    Dis-nous quel véhicule tu utilises pour covoiturer. Cela permet d’ajouter une
+                    touche de confiance et de clarté pour les personnes qui voyageront avec toi.
                 </Text>
-                <Image source={faceConfirmation} style={styles.image} />
+                <Image source={carVerification} style={styles.image} />
                 <View style={styles.uploadRow}></View>
             </View>
 
             <Button
                 title="Continuer"
-                onPress={() => router.push('/Profile/cameraIdentityVerification')}
+                onPress={() => router.push('/Profile/carInformation')}
                 color={colors.primary}
                 isFixedBottom={true}
                 disabledColor={colors.grayLight}
@@ -65,10 +64,11 @@ const styles = StyleSheet.create({
     },
     image: {
         marginTop: 36,
-        width: 220,
-        height: 220,
+        width: 200,
+        height: 200,
         alignSelf: 'center',
         marginVertical: 24,
+        resizeMode: 'contain',
     },
     uploadRow: {
         flexDirection: 'row',
