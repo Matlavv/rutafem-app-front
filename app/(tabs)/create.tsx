@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
@@ -82,147 +82,155 @@ export default function CreateScreen() {
         },
     });
 
+    const handleOutsideClick = () => {
+        setIsDepartureDatePickerOpen(false);
+        setIsArrivalDatePickerOpen(false);
+    };
+
 
     return (
-        <View style={styles.container}>
-            {/* Header */}
-            <Header
-                title="Créer un trajet"
-                image={mountain}
-                showBackButton={false}
-                scrollOffsetY={scrollOffsetY}
-            />
+        <TouchableWithoutFeedback onPress={handleOutsideClick}>
 
-            <Animated.ScrollView
-                onScroll={onScroll}
-                contentContainerStyle={{
-                    paddingTop: layout.headerMaxHeight + 16,
-                    paddingHorizontal: 16,
-                    paddingBottom: 32,
-                    gap: 16,
-                }}
-            // stickyHeaderIndices={[0]}
-            // StickyHeaderComponent={() => (
-            //     <View style={styles.stepsContainer}>
-            //         <View style={styles.activeStep}>
-            //             <Text style={styles.stepText}>1</Text>
-            //         </View>
-            //         <View style={styles.stepLine} />
-            //         <View style={styles.inactiveStep}>
-            //             <Text style={styles.stepText}>2</Text>
-            //         </View>
-            //     </View>
-            // )}
-            >
-
-                <View style={styles.stepsContainer}>
-                    <View style={styles.activeStep}>
-                        <Text style={styles.stepText}>1</Text>
-                    </View>
-                    <View style={styles.stepLine} />
-                    <View style={styles.inactiveStep}>
-                        <Text style={styles.stepText}>2</Text>
-                    </View>
-                </View>
-
-                {/* Forms */}
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Adresse de départ</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={departurePosition}
-                        onChangeText={setDeparturePosition}
-                        placeholder="Ex: Paris"
-                        placeholderTextColor={colors.grayLight}
-                    />
-                </View>
-
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Adresse de destination</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={arrivalPosition}
-                        onChangeText={setArrivalPosition}
-                        placeholder="Ex: Paris"
-                        placeholderTextColor={colors.grayLight}
-                    />
-                </View>
-
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 30 }}>
-                    <DatePicker
-                        departureDate={departureDate}
-                        colors={colors}
-                        labelStyle={styles.label}
-                        isDatePickerOpen={isDepartureDatePickerOpen}
-                        setIsDatePickerOpen={setIsDepartureDatePickerOpen}
-                        onChange={(date: DateType) => {
-                            setDepartureDate(date);
-                        }}
-                    />
-
-                    <DatePicker
-                        departureDate={arrivalDate}
-                        colors={colors}
-                        labelStyle={styles.label}
-                        isDatePickerOpen={isArrivalDatePickerOpen}
-                        setIsDatePickerOpen={setIsArrivalDatePickerOpen}
-                        onChange={(date: DateType) => {
-                            setArrivalDate(date);
-                        }}
-                    />
-                </View>
-
-
-
-
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Heure</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={departureTime}
-                        onChangeText={setDepartureTime}
-                        placeholder="Ex: 14:30"
-                        placeholderTextColor={colors.grayLight}
-                    />
-                </View>
-
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Places disponibles</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={availableSeats}
-                        onChangeText={setAvailableSeats}
-                        placeholder="Ex: 3"
-                        keyboardType="numeric"
-                        placeholderTextColor={colors.grayLight}
-                    />
-                </View>
-
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Prix (€)</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={price}
-                        onChangeText={setPrice}
-                        placeholder="Ex: 25"
-                        keyboardType="numeric"
-                        placeholderTextColor={colors.grayLight}
-                    />
-                </View>
-
-                {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-                <Button
-                    title={loading ? 'Chargement...' : 'Continuer'}
-                    onPress={handleSubmit}
-                    disabled={loading}
-                    color={colors.secondary}
+            <View style={styles.container}>
+                {/* Header */}
+                <Header
+                    title="Créer un trajet"
+                    image={mountain}
+                    showBackButton={false}
+                    scrollOffsetY={scrollOffsetY}
                 />
 
+                <Animated.ScrollView
+                    onScroll={onScroll}
+                    contentContainerStyle={{
+                        paddingTop: layout.headerMaxHeight + 16,
+                        paddingHorizontal: 16,
+                        paddingBottom: 32,
+                        gap: 16,
+                    }}
+                // stickyHeaderIndices={[0]}
+                // StickyHeaderComponent={() => (
+                //     <View style={styles.stepsContainer}>
+                //         <View style={styles.activeStep}>
+                //             <Text style={styles.stepText}>1</Text>
+                //         </View>
+                //         <View style={styles.stepLine} />
+                //         <View style={styles.inactiveStep}>
+                //             <Text style={styles.stepText}>2</Text>
+                //         </View>
+                //     </View>
+                // )}
+                >
 
-            </Animated.ScrollView>
-        </View>
+                    <View style={styles.stepsContainer}>
+                        <View style={styles.activeStep}>
+                            <Text style={styles.stepText}>1</Text>
+                        </View>
+                        <View style={styles.stepLine} />
+                        <View style={styles.inactiveStep}>
+                            <Text style={styles.stepText}>2</Text>
+                        </View>
+                    </View>
+
+                    {/* Forms */}
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Adresse de départ</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={departurePosition}
+                            onChangeText={setDeparturePosition}
+                            placeholder="Ex: Paris"
+                            placeholderTextColor={colors.grayLight}
+                        />
+                    </View>
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Adresse de destination</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={arrivalPosition}
+                            onChangeText={setArrivalPosition}
+                            placeholder="Ex: Paris"
+                            placeholderTextColor={colors.grayLight}
+                        />
+                    </View>
+
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 30 }}>
+                        <DatePicker
+                            departureDate={departureDate}
+                            colors={colors}
+                            labelStyle={styles.label}
+                            isDatePickerOpen={isDepartureDatePickerOpen}
+                            setIsDatePickerOpen={setIsDepartureDatePickerOpen}
+                            onChange={(date: DateType) => {
+                                setDepartureDate(date);
+                            }}
+                        />
+
+                        <DatePicker
+                            departureDate={arrivalDate}
+                            colors={colors}
+                            labelStyle={styles.label}
+                            isDatePickerOpen={isArrivalDatePickerOpen}
+                            setIsDatePickerOpen={setIsArrivalDatePickerOpen}
+                            onChange={(date: DateType) => {
+                                setArrivalDate(date);
+                            }}
+                        />
+                    </View>
+
+
+
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Heure</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={departureTime}
+                            onChangeText={setDepartureTime}
+                            placeholder="Ex: 14:30"
+                            placeholderTextColor={colors.grayLight}
+                        />
+                    </View>
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Places disponibles</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={availableSeats}
+                            onChangeText={setAvailableSeats}
+                            placeholder="Ex: 3"
+                            keyboardType="numeric"
+                            placeholderTextColor={colors.grayLight}
+                        />
+                    </View>
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Prix (€)</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={price}
+                            onChangeText={setPrice}
+                            placeholder="Ex: 25"
+                            keyboardType="numeric"
+                            placeholderTextColor={colors.grayLight}
+                        />
+                    </View>
+
+                    {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+                    <Button
+                        title={loading ? 'Chargement...' : 'Continuer'}
+                        onPress={handleSubmit}
+                        disabled={loading}
+                        color={colors.secondary}
+                    />
+
+
+                </Animated.ScrollView>
+            </View>
+        </TouchableWithoutFeedback>
     );
 }
 
