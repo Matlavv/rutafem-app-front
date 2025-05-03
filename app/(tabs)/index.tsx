@@ -1,23 +1,30 @@
-import { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image, TouchableWithoutFeedback } from 'react-native';
-import DateTimePicker, { DateType, useDefaultStyles } from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
+import { useState } from 'react';
+import {
+    Image,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View,
+} from 'react-native';
+import { DateType, useDefaultStyles } from 'react-native-ui-datepicker';
 
 // COMPONENTS
+import SvgIcon from '@/components/elements/SvgIcon';
 import Button from '@/components/elements/button';
+import Select from '@/components/elements/select';
 import HeaderSmall from '@/components/headerSmall';
 import colors from '@/styles/colors';
-import SvgIcon from '@/components/elements/SvgIcon';
-import Select from '@/components/elements/select';
 
 // IMAGES
 import { backgroundRoad } from '@/assets/images';
-import { router } from 'expo-router';
 import DatePicker from '@/components/elements/datePicker';
-
+import { router } from 'expo-router';
 
 export default function HomeScreen() {
-
     const defaultStyles = useDefaultStyles();
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
     const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -35,18 +42,15 @@ export default function HomeScreen() {
     return (
         <TouchableWithoutFeedback onPress={handleOutsideClick}>
             <SafeAreaView style={styles.container}>
-
                 <Image source={backgroundRoad} style={styles.backgroundRoad} />
                 <Image source={backgroundRoad} style={styles.backgroundRoad2} />
 
                 <View style={styles.homeContainer}>
-
                     <HeaderSmall />
 
                     <Text style={styles.title}>Où allez-vous ?</Text>
 
                     <View style={styles.searchContainer}>
-
                         <View style={styles.search__visual}>
                             <View style={styles.search__visual_circle} />
                             <View style={styles.search__visual_dash} />
@@ -76,12 +80,16 @@ export default function HomeScreen() {
                     </View>
 
                     <TouchableOpacity style={styles.geolocContainer}>
-                        <SvgIcon name="mapPin" fillColor={colors.secondary} width={16} height={16} />
+                        <SvgIcon
+                            name="mapPin"
+                            fillColor={colors.secondary}
+                            width={16}
+                            height={16}
+                        />
                         <Text style={styles.geoloc__text}>Utiliser ma position actuelle</Text>
                     </TouchableOpacity>
 
                     <View style={{ flexDirection: 'row', alignItems: 'stretch', gap: 50 }}>
-
                         <DatePicker
                             departureDate={departureDate}
                             colors={colors}
@@ -97,8 +105,21 @@ export default function HomeScreen() {
                             <Text style={styles.pick__label}>Voyageuses</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
                                 <Select
-                                    options={[{ label: "1 voyageuse", value: 1 }, { label: "2 voyageuses", value: 2 }, { label: "3 voyageuses", value: 3 }, { label: "4 voyageuses", value: 4 }, { label: "5 voyageuses", value: 5 }]}
-                                    icon={<SvgIcon name="profile" fillColor={colors.secondary} width={24} height={24} />}
+                                    options={[
+                                        { label: '1 voyageuse', value: 1 },
+                                        { label: '2 voyageuses', value: 2 },
+                                        { label: '3 voyageuses', value: 3 },
+                                        { label: '4 voyageuses', value: 4 },
+                                        { label: '5 voyageuses', value: 5 },
+                                    ]}
+                                    icon={
+                                        <SvgIcon
+                                            name="profile"
+                                            fillColor={colors.secondary}
+                                            width={24}
+                                            height={24}
+                                        />
+                                    }
                                     isSelectOpen={isSelectOpen}
                                     onChange={(value: number) => {
                                         setPassengers(value);
@@ -112,7 +133,11 @@ export default function HomeScreen() {
                     <Button
                         title="Rechercher"
                         color={colors.secondary}
-                        disabled={departurePosition === '' || arrivalPosition === '' || departureDate === undefined}
+                        disabled={
+                            departurePosition === '' ||
+                            arrivalPosition === '' ||
+                            departureDate === undefined
+                        }
                         isFixedBottom={true}
                         disabledColor={colors.secondaryLight}
                         onPress={() => {
@@ -123,11 +148,10 @@ export default function HomeScreen() {
                                     arrivalPosition,
                                     departureDate: dayjs(departureDate).format('YYYY-MM-DD'),
                                     passengers,
-                                }
+                                },
                             });
                         }}
                     />
-
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -139,6 +163,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         flex: 1,
         position: 'relative',
+        marginTop: 24,
     },
     homeContainer: {
         flex: 1,

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "lean-startup-app",
-    "slug": "lean-startup-app",
+    "name": "rutafem-app",
+    "slug": "rutafem-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "rutafem-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -36,6 +36,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a5651678-e4ba-4566-89de-a62fd4950f49"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a5651678-e4ba-4566-89de-a62fd4950f49"
     }
   }
 }

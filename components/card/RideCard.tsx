@@ -1,23 +1,26 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { router } from 'expo-router';
 import colors from '@/styles/colors';
+import { router } from 'expo-router';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // DATAS
-import usersRidesDatas from '@/datas/users_rides.json';
 import usersDatas from '@/datas/users.json';
+import usersRidesDatas from '@/datas/users_rides.json';
 import SvgIcon from '../elements/SvgIcon';
 
 export default function RideCard({ ride }: { ride: Ride }) {
-
-    const driverId = usersRidesDatas.find((user_ride) => user_ride.ride_id === ride.id && user_ride.driver === true);
+    const driverId = usersRidesDatas.find(
+        (user_ride) => user_ride.ride_id === ride.id && user_ride.driver === true,
+    );
     const driver = usersDatas.find((user) => user.id === driverId?.user_id);
 
     const formattedDate = new Date(ride.departure_datetime).toLocaleDateString('fr-FR');
 
     return (
-        <TouchableOpacity style={styles.card} onPress={() => router.push({ pathname: '/Ride/rideDetail', params: ride })}>
-
+        <TouchableOpacity
+            style={styles.card}
+            onPress={() => router.push({ pathname: '/ride/rideDetail', params: ride })}
+        >
             <View>
                 {/* Avatar */}
                 <Image
@@ -29,7 +32,6 @@ export default function RideCard({ ride }: { ride: Ride }) {
 
             <View style={styles.rightContainer}>
                 <View style={styles.rowTop}>
-
                     {/* Ride info */}
                     <View style={styles.rideInfoContainer}>
                         <View style={styles.citiesRow}>
@@ -46,7 +48,9 @@ export default function RideCard({ ride }: { ride: Ride }) {
                     </View>
                     {/* Price and date */}
                     <View style={styles.priceCol}>
-                        <Text style={styles.priceText}>{Number.isInteger(ride.price) ? ride.price : ride.price.toFixed(2)}€</Text>
+                        <Text style={styles.priceText}>
+                            {Number.isInteger(ride.price) ? ride.price : ride.price.toFixed(2)}€
+                        </Text>
                         <Text style={styles.dateText}>{formattedDate}</Text>
                     </View>
                 </View>
@@ -55,19 +59,19 @@ export default function RideCard({ ride }: { ride: Ride }) {
 
                 <View style={styles.rowBottom}>
                     <View>
-                        <Text style={styles.driverName}>{driver?.firstname} {driver?.lastname}</Text>
+                        <Text style={styles.driverName}>
+                            {driver?.firstname} {driver?.lastname}
+                        </Text>
                     </View>
                     <View style={styles.ratingRow}>
                         <Text style={styles.ratingText}>{driver?.rating ?? 4.5}</Text>
                         <SvgIcon name="star" width={16} height={16} fillColor="#FFBA00" />
                     </View>
                 </View>
-
             </View>
-
         </TouchableOpacity>
     );
-};
+}
 
 const styles = StyleSheet.create({
     card: {
