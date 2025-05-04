@@ -56,7 +56,7 @@ export default function phoneVerification() {
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.keyboardAvoidingView}
             >
-                <Stepper currentStep={3} totalSteps={6} />
+                <Stepper currentStep={3} totalSteps={5} />
                 <View style={styles.header}>
                     <View style={styles.headerContainer}>
                         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>

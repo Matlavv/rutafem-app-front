@@ -55,7 +55,7 @@ export default function profilUserInformation() {
                     showsVerticalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
                 >
-                    <Stepper currentStep={2} totalSteps={6} />
+                    <Stepper currentStep={2} totalSteps={5} />
                     <View style={styles.content}>
                         <View style={styles.headerContainer}>
                             <TouchableOpacity

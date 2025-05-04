@@ -23,7 +23,7 @@ export default function drivingLicenceVerification() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={5} totalSteps={6} />
+            <Stepper currentStep={2} totalSteps={2} />
             <View style={styles.content}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
@@ -82,7 +82,7 @@ export default function drivingLicenceVerification() {
             </View>
             <Button
                 title="Continuer"
-                onPress={() => router.push('/Profile/userProfileDetails')}
+                onPress={() => router.push('/(tabs)/account/profile')}
                 color={colors.primary}
                 isFixedBottom={true}
                 disabledColor={colors.grayLight}

@@ -23,7 +23,7 @@ export default function profilIDCard() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={1} totalSteps={6} />
+            <Stepper currentStep={1} totalSteps={5} />
             <View style={styles.content}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>

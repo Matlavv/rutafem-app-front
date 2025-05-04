@@ -40,7 +40,7 @@ export default function userProfileDetails() {
                     showsVerticalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
                 >
-                    <Stepper currentStep={6} totalSteps={6} />
+                    <Stepper currentStep={5} totalSteps={5} />
                     <View style={styles.content}>
                         <View style={styles.headerContainer}>
                             <TouchableOpacity
@@ -136,7 +136,7 @@ export default function userProfileDetails() {
                     <View style={styles.buttonContainer}>
                         <Button
                             title="Accepter et finir"
-                            onPress={() => router.push('/(tabs)/profile')}
+                            onPress={() => router.push('/(tabs)/account/profile')}
                             color={colors.primary}
                             disabledColor={colors.grayLight}
                             style={styles.nextButton}

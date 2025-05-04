@@ -53,7 +53,10 @@ export default function ProfileScreen() {
                         <SvgIcon name="bag" width={16} height={16} strokeColor="#F16134" />
                         <Text style={styles.badgeText}>Voyageuse débutante</Text>
                     </View>
-                    <TouchableOpacity style={styles.driverBtn}>
+                    <TouchableOpacity
+                        style={styles.driverBtn}
+                        onPress={() => router.push('/Profile/carVerificationStart')}
+                    >
                         <SvgIcon name="car" width={20} height={20} fillColor="#fff" />
                         <Text style={styles.driverBtnText}>Devenir conductrice</Text>
                     </TouchableOpacity>

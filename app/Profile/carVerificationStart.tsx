@@ -10,7 +10,7 @@ import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'r
 export default function carVerificationStart() {
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={5} totalSteps={6} />
+            <Stepper currentStep={1} totalSteps={2} />
 
             <View style={styles.content}>
                 <View style={styles.headerContainer}>

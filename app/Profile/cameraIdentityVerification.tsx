@@ -1,10 +1,11 @@
 import Button from '@/components/elements/button';
+import SvgIcon from '@/components/elements/SvgIcon';
 import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
 import { CameraType, CameraView, useCameraPermissions } from 'expo-camera';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function CameraIdentityVerification() {
     const [facing, setFacing] = useState<CameraType>('front');
@@ -16,24 +17,48 @@ export default function CameraIdentityVerification() {
 
     if (!permission.granted) {
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>
-                    Nous avons besoin de votre permission pour accéder à la caméra
-                </Text>
-                <Button
-                    title="Autoriser l'accès"
-                    onPress={requestPermission}
-                    color={colors.primary}
-                    style={styles.button}
-                />
+            <View style={styles.permissionContainer}>
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                        <SvgIcon
+                            name="chevronLeft"
+                            width={34}
+                            height={34}
+                            strokeColor={colors.black}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>Confirme ton identité</Text>
+                </View>
+                <View style={styles.centerContent}>
+                    <Text style={styles.text}>
+                        Nous avons besoin de votre permission pour accéder à la caméra
+                    </Text>
+                    <Button
+                        title="Autoriser l'accès"
+                        onPress={requestPermission}
+                        color={colors.primary}
+                        style={styles.button}
+                    />
+                </View>
             </View>
         );
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={4} totalSteps={6} />
+            <Stepper currentStep={4} totalSteps={5} />
             <View style={styles.container}>
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                        <SvgIcon
+                            name="chevronLeft"
+                            width={34}
+                            height={34}
+                            strokeColor={colors.black}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>Confirme ton identité</Text>
+                </View>
                 <CameraView style={styles.camera} facing={facing}>
                     <View style={styles.buttonContainer}></View>
                 </CameraView>
@@ -41,7 +66,7 @@ export default function CameraIdentityVerification() {
             <View style={styles.buttonContainer}>
                 <Button
                     title="Valider"
-                    onPress={() => router.push('/Profile/carVerificationStart')}
+                    onPress={() => router.push('/Profile/userProfileDetails')}
                     color={colors.primary}
                 />
             </View>
@@ -59,12 +84,32 @@ const styles = StyleSheet.create({
         padding: 24,
         marginTop: 24,
     },
-    header: {
+    permissionContainer: {
+        flex: 1,
+        backgroundColor: colors.background,
+        marginHorizontal: 24,
+        paddingTop: 24,
+        paddingBottom: 0,
         marginTop: 24,
-        marginBottom: 32,
+    },
+    centerContent: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 24,
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 16,
+    },
+    backButton: {
+        marginRight: 8,
+        marginBottom: 12,
     },
     title: {
-        fontSize: 28,
+        fontSize: 24,
         fontWeight: 'bold',
         color: colors.text,
         marginBottom: 16,

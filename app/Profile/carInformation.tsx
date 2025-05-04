@@ -85,7 +85,7 @@ export default function CarInformation() {
                     showsVerticalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
                 >
-                    <Stepper currentStep={5} totalSteps={6} />
+                    <Stepper currentStep={1} totalSteps={2} />
                     <View style={styles.content}>
                         <View style={styles.headerContainer}>
                             <TouchableOpacity

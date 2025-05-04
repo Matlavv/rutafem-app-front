@@ -10,7 +10,7 @@ import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'r
 export default function profilIdentityVerification() {
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={4} totalSteps={6} />
+            <Stepper currentStep={4} totalSteps={5} />
 
             <View style={styles.content}>
                 <View style={styles.headerContainer}>
