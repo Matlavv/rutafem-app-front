@@ -1,4 +1,4 @@
-const HEADER_MAX_HEIGHT = 340;
+const HEADER_MAX_HEIGHT = 300;
 const HEADER_MIN_HEIGHT = 170;
 
 

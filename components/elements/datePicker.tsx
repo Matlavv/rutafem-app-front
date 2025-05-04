@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     },
     picked_label: {
         fontSize: 14,
-        fontWeight: 'semibold',
-        marginBottom: 8,
+        fontWeight: 600,
     },
 });

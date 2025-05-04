@@ -170,16 +170,17 @@ export default function profilUserInformation() {
                             />
                         </View>
                     </View>
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            title="Continuer"
-                            onPress={() => router.push('/Profile/phoneVerification')}
-                            color={colors.primary}
-                            disabledColor={colors.grayLight}
-                            style={styles.nextButton}
-                            disabled={isReady}
-                        />
-                    </View>
+                    {/* <View style={styles.buttonContainer}> */}
+                    <Button
+                        title="Continuer"
+                        onPress={() => router.push('/Profile/phoneVerification')}
+                        color={colors.primary}
+                        disabledColor={colors.grayLight}
+                        style={styles.nextButton}
+                        disabled={isReady}
+                        isFixedBottom={true}
+                    />
+                    {/* </View> */}
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>

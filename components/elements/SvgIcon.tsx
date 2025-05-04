@@ -133,11 +133,11 @@ const icons: {
         >
             <Path
                 d="M24 12.0001C24 5.3727 18.6274 0.000118256 12 0.000118256C5.37258 0.000118256 0 5.3727 0 12.0001C0 17.9897 4.38823 22.9541 10.125 23.8543V15.4689H7.07813V12.0001H10.125V9.35637C10.125 6.34887 11.9165 4.68762 14.6576 4.68762C15.9705 4.68762 17.3438 4.92199 17.3438 4.92199V7.87512H15.8306C14.3399 7.87512 13.875 8.80013 13.875 9.74911V12.0001H17.2031L16.6711 15.4689H13.875V23.8543C19.6118 22.9541 24 17.9897 24 12.0001Z"
-                fill="white"
+                fill={fillColor}
             />
             <Path
                 d="M16.6711 15.4688L17.2031 12H13.875V9.74899C13.875 8.80001 14.3399 7.875 15.8306 7.875H17.3438V4.92188C17.3438 4.92188 15.9705 4.6875 14.6576 4.6875C11.9165 4.6875 10.125 6.34875 10.125 9.35625V12H7.07812V15.4688H10.125V23.8542C10.7359 23.9501 11.3621 24 12 24C12.6379 24 13.2641 23.9501 13.875 23.8542V15.4688H16.6711Z"
-                fill={fillColor}
+                fill="transparent"
             />
         </Svg>
     ),
@@ -251,6 +251,20 @@ const icons: {
             strokeLinejoin="round"
         >
             <Path d="M1 1L6 6L11 1" />
+        </Svg>
+    ),
+    chevronLeft: ({ strokeColor, strokeWidth, fillColor, width, height }: SvgProps) => (
+        <Svg
+            viewBox="0 0 24 24"
+            {...(width && { width })}
+            {...(height && { height })}
+            fill={fillColor}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <Path d="M15 6l-6 6l6 6" />
         </Svg>
     ),
     default: ({ strokeColor, strokeWidth, fillColor, width, height }: SvgProps) => (

@@ -1,17 +1,11 @@
-import SvgIcon from '@/components/elements/SvgIcon';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { maintenance } from '@/assets/images';
 
 export default function MessageScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <SvgIcon
-                    name="cross"
-                    width={170}
-                    height={160}
-                    strokeColor="#3B3B3D"
-                    strokeWidth={0.5}
-                />
+                <Image source={maintenance} style={styles.image} width={240} height={240} />
                 <Text style={styles.title}>En cours de développement</Text>
                 <Text style={styles.description}>
                     Cette fonctionnalité sera bientôt disponible. Notre équipe travaille activement
@@ -25,16 +19,15 @@ export default function MessageScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F9FAFB',
+        margin: 24,
     },
     content: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 24,
     },
-    icon: {
-        marginBottom: 24,
+    image: {
+        marginBottom: 40,
     },
     title: {
         fontSize: 24,

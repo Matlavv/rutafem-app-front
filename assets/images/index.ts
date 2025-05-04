@@ -10,6 +10,7 @@ import mountain from './mountain.png';
 import permis from './permis.png';
 import phoneValidated from './phoneValidated.png';
 import travelerCharacter from './travelerCharacter.png';
+import maintenance from './maintenance.png';
 
 export {
     backgroundRoad,
@@ -24,4 +25,5 @@ export {
     permis,
     phoneValidated,
     travelerCharacter,
+    maintenance,
 };

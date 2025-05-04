@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     },
     select__text: {
         fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: 600,
     },
 });

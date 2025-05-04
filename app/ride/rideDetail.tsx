@@ -2,7 +2,7 @@ import { canyon } from '@/images';
 import layout from '@/styles/layout';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // COMPONENTS
 import SvgIcon from '@/components/elements/SvgIcon';
@@ -153,7 +153,15 @@ export default function RideDetails() {
                                     style={styles.driverImage}
                                 />
                                 <View style={styles.socialIcons}>
-                                    <Text style={{ fontSize: 24 }}>📸 👍 🎵</Text>
+                                    <TouchableOpacity>
+                                        <SvgIcon name="instagram" width={24} height={24} fillColor="#E1306C" />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity>
+                                        <SvgIcon name="facebook" width={24} height={24} fillColor="#1877F2" />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity>
+                                        <SvgIcon name="spotify" width={24} height={24} fillColor="#1ed760" />
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
@@ -270,13 +278,14 @@ const styles = StyleSheet.create({
         gap: 8,
     },
     driverImage: {
-        width: 60,
-        height: 60,
+        width: 80,
+        height: 80,
         borderRadius: 50,
     },
 
     socialIcons: {
         flexDirection: 'row',
+        alignItems: 'center',
         gap: 8,
     },
 

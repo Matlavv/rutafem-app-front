@@ -2,15 +2,7 @@ import SvgIcon from '@/components/elements/SvgIcon';
 import colors from '@/styles/colors';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import {
-    Alert,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
 // TODO navbar dans login et register
@@ -39,13 +31,20 @@ export default function LoginScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>Connexion</Text>
-            <Text style={styles.subtitle}>
-                Utilise tes identifiants pour accéder a ton compte Rutafem. Pas encore de compte ?{' '}
-                <Text style={styles.linkBlue} onPress={() => router.push('./register')}>
-                    Je m'inscris
+            <View>
+                <View style={{ flexDirection: 'row', gap: 12, marginTop: 24 }}>
+                    <TouchableOpacity onPress={() => router.push('/')}>
+                        <SvgIcon name="chevronLeft" width={34} height={34} strokeColor={colors.black} />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>Connexion</Text>
+                </View>
+                <Text style={styles.subtitle}>
+                    Utilise tes identifiants pour accéder a ton compte Rutafem. Pas encore de compte ?{' '}
+                    <Text style={styles.linkBlue} onPress={() => router.push('./register')}>
+                        Je m'inscris
+                    </Text>
                 </Text>
-            </Text>
+            </View>
 
             <View style={styles.formCard}>
                 {/* Email */}
@@ -127,7 +126,7 @@ export default function LoginScreen() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButtonFacebook}>
                 <View style={{ marginRight: 8 }}>
-                    <SvgIcon name="facebook" width={22} height={22} fillColor={colors.blue} />
+                    <SvgIcon name="facebook" width={22} height={22} fillColor={colors.white} />
                 </View>
                 <Text style={styles.socialButtonTextFB}>Continuer avec Facebook</Text>
             </TouchableOpacity>
@@ -136,12 +135,11 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: colors.background, padding: 24 },
+    container: { flex: 1, backgroundColor: colors.background, margin: 24 },
     title: {
         fontSize: 32,
         fontWeight: 'bold',
         color: colors.text,
-        marginTop: 24,
     },
     subtitle: {
         fontSize: 15,

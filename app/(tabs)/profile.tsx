@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
-        padding: 24,
+        margin: 24,
     },
     hello: {
         fontSize: 22,
