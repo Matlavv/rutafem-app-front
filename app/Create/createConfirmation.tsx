@@ -1,6 +1,7 @@
 import { mountain } from '@/assets/images';
 import Button from '@/components/elements/button';
 import Header from '@/components/header';
+import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
 import layout from '@/styles/layout';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -37,13 +38,7 @@ export default function CreateConfirmation() {
             <View style={styles.container}>
                 {/* Steps */}
                 <View style={styles.stepsContainer}>
-                    <View style={styles.inactiveStep}>
-                        <Text style={styles.stepText}>1</Text>
-                    </View>
-                    <View style={styles.stepLine} />
-                    <View style={styles.activeStep}>
-                        <Text style={styles.stepText}>2</Text>
-                    </View>
+                    <Stepper currentStep={2} totalSteps={2} />
                 </View>
 
                 <Text style={styles.sectionTitle}>Confirmation du trajet</Text>

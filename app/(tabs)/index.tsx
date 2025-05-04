@@ -136,7 +136,7 @@ export default function HomeScreen() {
                         </View>
                     </View>
                     <Button
-                        style={{ marginBottom: 60 }}
+                        style={{ marginBottom: 70 }}
                         title="Rechercher"
                         color={colors.secondary}
                         disabled={

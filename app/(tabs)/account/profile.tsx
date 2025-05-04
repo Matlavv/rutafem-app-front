@@ -1,15 +1,27 @@
+import { backgroundRoad } from '@/assets/images';
 import Button from '@/components/elements/button';
 import SvgIcon from '@/components/elements/SvgIcon';
+import users from '@/datas/users.json';
 import colors from '@/styles/colors';
 import { useFocusEffect } from '@react-navigation/native';
 import { router, useNavigation } from 'expo-router';
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+    Image,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import { useAuth } from '../../../context/AuthContext';
 
 export default function ProfileScreen() {
     const { user, isAuthenticated, logout } = useAuth();
     const navigation = useNavigation();
+
+    const currentUser = users.find((u) => u.id === user?.id);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -29,6 +41,8 @@ export default function ProfileScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Image source={backgroundRoad} style={styles.backgroundRoad} />
+            <Image source={backgroundRoad} style={styles.backgroundRoad2} />
             <View style={styles.content}>
                 <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
                     <Text style={styles.hello}>Salut</Text>
@@ -37,12 +51,9 @@ export default function ProfileScreen() {
                     </Text>
                     <TouchableOpacity style={styles.avatarWrapper}>
                         <View>
-                            <SvgIcon
-                                name="profile"
-                                width={170}
-                                height={160}
-                                strokeColor="#3B3B3D"
-                                strokeWidth={0.5}
+                            <Image
+                                source={{ uri: currentUser?.profile_image_url }}
+                                style={styles.avatarImage}
                             />
                             <View style={styles.penIconWrapper}>
                                 <SvgIcon name="pen" width={24} height={24} strokeWidth={0.5} />
@@ -144,11 +155,11 @@ const styles = StyleSheet.create({
     penIconWrapper: {
         borderWidth: 2,
         position: 'absolute',
-        right: -8,
+        right: 0,
         top: 8,
         backgroundColor: '#fff',
         borderRadius: 20,
-        padding: 6,
+        padding: 8,
         elevation: 2,
     },
     badgeWrapper: {
@@ -227,6 +238,28 @@ const styles = StyleSheet.create({
     },
     verifyBtnContainer: {
         width: '100%',
-        marginBottom: 56,
+        marginBottom: 64,
+    },
+    avatarImage: {
+        width: 240,
+        height: 240,
+        borderRadius: 120,
+        backgroundColor: colors.grayLight,
+    },
+    backgroundRoad: {
+        position: 'absolute',
+        width: 400,
+        objectFit: 'contain',
+        bottom: -340,
+        left: -130,
+        right: 0,
+    },
+    backgroundRoad2: {
+        position: 'absolute',
+        width: 350,
+        objectFit: 'contain',
+        top: -80,
+        right: -300,
+        transform: [{ rotate: '-167.66deg' }],
     },
 });
