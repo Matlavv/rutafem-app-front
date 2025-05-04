@@ -2,7 +2,15 @@ import SvgIcon from '@/components/elements/SvgIcon';
 import colors from '@/styles/colors';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+    Alert,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
 // TODO navbar dans login et register
@@ -33,13 +41,11 @@ export default function LoginScreen() {
         <SafeAreaView style={styles.container}>
             <View>
                 <View style={{ flexDirection: 'row', gap: 12, marginTop: 24 }}>
-                    <TouchableOpacity onPress={() => router.push('/')}>
-                        <SvgIcon name="chevronLeft" width={34} height={34} strokeColor={colors.black} />
-                    </TouchableOpacity>
                     <Text style={styles.title}>Connexion</Text>
                 </View>
                 <Text style={styles.subtitle}>
-                    Utilise tes identifiants pour accéder a ton compte Rutafem. Pas encore de compte ?{' '}
+                    Utilise tes identifiants pour accéder a ton compte Rutafem. Pas encore de compte
+                    ?{' '}
                     <Text style={styles.linkBlue} onPress={() => router.push('./register')}>
                         Je m'inscris
                     </Text>
@@ -80,6 +86,7 @@ export default function LoginScreen() {
                                 onChangeText={setPassword}
                                 placeholder="******"
                                 secureTextEntry={!showPassword}
+                                autoCapitalize="none"
                                 placeholderTextColor={colors.gray}
                             />
                         </View>

@@ -1,5 +1,6 @@
 import { phoneValidated } from '@/assets/images';
 import Button from '@/components/elements/button';
+import SvgIcon from '@/components/elements/SvgIcon';
 import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
 import { router } from 'expo-router';
@@ -13,6 +14,7 @@ import {
     StyleSheet,
     Text,
     TextInput,
+    TouchableOpacity,
     View,
 } from 'react-native';
 
@@ -56,9 +58,19 @@ export default function phoneVerification() {
             >
                 <Stepper currentStep={3} totalSteps={6} />
                 <View style={styles.header}>
-                    <Text style={styles.title}>
-                        {!isValidated ? 'Confirme ton téléphone' : 'Numéro Vérifié !'}
-                    </Text>
+                    <View style={styles.headerContainer}>
+                        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                            <SvgIcon
+                                name="chevronLeft"
+                                width={34}
+                                height={34}
+                                strokeColor={colors.black}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.title}>
+                            {!isValidated ? 'Confirme ton téléphone' : 'Numéro Vérifié !'}
+                        </Text>
+                    </View>
                     <Text style={styles.description}>
                         {!isValidated
                             ? `Nous t'avons envoyé un code par SMS.\nEntre-le ici pour confirmer que ce numéro t'appartient.\nC'est rapide et ça renforce la sécurité de ton compte.`
@@ -125,6 +137,28 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         width: '100%',
     },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 16,
+    },
+    backButton: {
+        marginRight: 8,
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: colors.text,
+        flex: 1,
+    },
+    description: {
+        fontSize: 15,
+        color: colors.text,
+        alignSelf: 'flex-start',
+        lineHeight: 22,
+        marginTop: 16,
+    },
     centerContent: {
         flex: 1,
         alignItems: 'center',
@@ -141,21 +175,6 @@ const styles = StyleSheet.create({
         width: 280,
         height: 280,
         resizeMode: 'contain',
-    },
-    title: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        color: colors.text,
-        marginBottom: 16,
-        alignSelf: 'flex-start',
-        marginTop: 42,
-    },
-    description: {
-        fontSize: 15,
-        color: colors.text,
-        alignSelf: 'flex-start',
-        lineHeight: 22,
-        marginTop: 16,
     },
     codeRow: {
         flexDirection: 'row',
