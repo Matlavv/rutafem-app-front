@@ -1,25 +1,41 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import SvgIcon from './SvgIcon';
 import DateTimePicker, { DateType, useDefaultStyles } from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 
 
-export default function DatePicker({ departureDate, colors, labelStyle, isDatePickerOpen, setIsDatePickerOpen, onChange }: { departureDate: DateType, colors: any, labelStyle?: any, isDatePickerOpen: boolean, setIsDatePickerOpen: (isDatePickerOpen: boolean) => void, onChange: (date: DateType) => void }) {
+interface DatePickerProps {
+    departureDate: DateType;
+    colors: any;
+    labelStyle?: any;
+    isDatePickerOpen: boolean;
+    setIsDatePickerOpen: (isDatePickerOpen: boolean) => void;
+    onChange: (date: DateType) => void;
+    style?: StyleProp<ViewStyle>;
+    onOpen?: () => void;
+}
+
+
+
+export default function DatePicker({ departureDate, colors, labelStyle, isDatePickerOpen, setIsDatePickerOpen, onChange, style, onOpen }: DatePickerProps) {
 
     const defaultStyles = useDefaultStyles();
 
 
     return (
         <View>
-            <TouchableOpacity onPress={() => { setIsDatePickerOpen(true) }}>
+            <TouchableOpacity onPress={() => {
+                setIsDatePickerOpen(true);
+                onOpen?.();
+            }}>
                 <Text style={labelStyle}>Date de départ</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
                     <SvgIcon name="calendar" fillColor={colors.secondary} strokeColor="transparent" width={24} height={24} />
                     <Text style={styles.picked_label}>{departureDate ? dayjs(departureDate).format('DD/MM/YYYY') : 'Sélectionner'}</Text>
                 </View>
             </TouchableOpacity>
-            <View style={[styles.datePicker, { opacity: isDatePickerOpen ? 1 : 0 }]}>
+            <View style={[styles.datePicker, { opacity: isDatePickerOpen ? 1 : 0 }, style]}>
                 <DateTimePicker
                     mode="single"
                     date={departureDate}
@@ -91,7 +107,7 @@ const styles = StyleSheet.create({
         zIndex: 20,
         borderRadius: 10,
         flex: 1,
-        top: 0,
+        top: 60,
         opacity: 0,
     },
     picked_label: {

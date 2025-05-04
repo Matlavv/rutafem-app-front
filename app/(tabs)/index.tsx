@@ -99,6 +99,9 @@ export default function HomeScreen() {
                             onChange={(date: DateType) => {
                                 setDepartureDate(date);
                             }}
+                            onOpen={() => {
+                                setIsSelectOpen(false);
+                            }}
                         />
 
                         <View>
@@ -124,7 +127,10 @@ export default function HomeScreen() {
                                     onChange={(value: number) => {
                                         setPassengers(value);
                                     }}
-                                    onToggle={() => setIsSelectOpen(!isSelectOpen)}
+                                    onToggle={() => {
+                                        setIsSelectOpen(!isSelectOpen);
+                                        setIsDatePickerOpen(false);
+                                    }}
                                 />
                             </View>
                         </View>

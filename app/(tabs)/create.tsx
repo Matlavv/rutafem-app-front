@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableWithoutFeedback, View, KeyboardAvoidingView, Platform } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 
 // COMPONENTS
@@ -83,7 +83,11 @@ export default function CreateScreen() {
 
     return (
         <TouchableWithoutFeedback onPress={handleOutsideClick}>
-            <View style={styles.container}>
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 30 : 0}
+            >
                 {/* Header */}
                 <Header
                     title="Créer un trajet"
@@ -101,18 +105,18 @@ export default function CreateScreen() {
                         gap: 16,
                     }}
                     showsVerticalScrollIndicator={false}
-                    // stickyHeaderIndices={[0]}
-                    // StickyHeaderComponent={() => (
-                    //     <View style={styles.stepsContainer}>
-                    //         <View style={styles.activeStep}>
-                    //             <Text style={styles.stepText}>1</Text>
-                    //         </View>
-                    //         <View style={styles.stepLine} />
-                    //         <View style={styles.inactiveStep}>
-                    //             <Text style={styles.stepText}>2</Text>
-                    //         </View>
-                    //     </View>
-                    // )}
+                // stickyHeaderIndices={[0]}
+                // StickyHeaderComponent={() => (
+                //     <View style={styles.stepsContainer}>
+                //         <View style={styles.activeStep}>
+                //             <Text style={styles.stepText}>1</Text>
+                //         </View>
+                //         <View style={styles.stepLine} />
+                //         <View style={styles.inactiveStep}>
+                //             <Text style={styles.stepText}>2</Text>
+                //         </View>
+                //     </View>
+                // )}
                 >
                     <View style={styles.stepsContainer}>
                         <View style={styles.activeStep}>
@@ -157,6 +161,9 @@ export default function CreateScreen() {
                             onChange={(date: DateType) => {
                                 setDepartureDate(date);
                             }}
+                            onOpen={() => {
+                                setIsArrivalDatePickerOpen(false);
+                            }}
                         />
 
                         <DatePicker
@@ -165,8 +172,12 @@ export default function CreateScreen() {
                             labelStyle={styles.label}
                             isDatePickerOpen={isArrivalDatePickerOpen}
                             setIsDatePickerOpen={setIsArrivalDatePickerOpen}
+                            style={{ left: -143 }} // TODO: remove this
                             onChange={(date: DateType) => {
                                 setArrivalDate(date);
+                            }}
+                            onOpen={() => {
+                                setIsDepartureDatePickerOpen(false);
                             }}
                         />
                     </View>
@@ -215,7 +226,7 @@ export default function CreateScreen() {
                         color={colors.secondary}
                     />
                 </Animated.ScrollView>
-            </View>
+            </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
     );
 }
