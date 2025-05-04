@@ -68,6 +68,7 @@ export default function CameraIdentityVerification() {
                     title="Valider"
                     onPress={() => router.push('/Profile/userProfileDetails')}
                     color={colors.primary}
+                    style={{ marginHorizontal: 24 }}
                 />
             </View>
         </SafeAreaView>

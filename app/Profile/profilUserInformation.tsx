@@ -183,7 +183,6 @@ export default function profilUserInformation() {
                             />
                         </View>
                     </View>
-                    {/* <View style={styles.buttonContainer}> */}
                     <Button
                         title="Continuer"
                         onPress={() => router.push('/Profile/phoneVerification')}
@@ -193,7 +192,6 @@ export default function profilUserInformation() {
                         disabled={isReady}
                         isFixedBottom={true}
                     />
-                    {/* </View> */}
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
@@ -204,14 +202,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
-        marginTop: 24,
+        margin: 24,
     },
     keyboardAvoidingView: {
         flex: 1,
     },
     scrollContent: {
         flexGrow: 1,
-        padding: 24,
         paddingTop: 24,
         paddingBottom: 100,
     },
@@ -310,6 +307,7 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     nextButton: {
+        marginTop: 24,
         marginBottom: 24,
     },
 });

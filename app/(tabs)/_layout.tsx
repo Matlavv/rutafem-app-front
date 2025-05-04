@@ -14,9 +14,9 @@ export default function TabLayout() {
                 tabBarStyle: Platform.select({
                     default: {
                         position: 'absolute',
-                        bottom: 10,
-                        left: 20,
-                        right: 20,
+                        bottom: 20,
+                        width: '90%',
+                        marginHorizontal: 20,
                         backgroundColor: '#FFFFFF',
                         borderWidth: 1,
                         borderColor: colors.grayLight,
