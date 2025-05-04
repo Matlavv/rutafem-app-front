@@ -1,20 +1,31 @@
 import { carVerification } from '@/assets/images';
 import Button from '@/components/elements/button';
+import SvgIcon from '@/components/elements/SvgIcon';
 import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
 import { router } from 'expo-router';
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function carVerificationStart() {
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={5} totalSteps={6} />
+            <Stepper currentStep={1} totalSteps={2} />
 
             <View style={styles.content}>
-                <Text style={styles.title}>Vérifie ton véhicule</Text>
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                        <SvgIcon
+                            name="chevronLeft"
+                            width={34}
+                            height={34}
+                            strokeColor={colors.black}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>Vérifie ton véhicule</Text>
+                </View>
                 <Text style={styles.description}>
-                    Dis-nous quel véhicule tu utilises pour covoiturer. Cela permet d’ajouter une
+                    Dis-nous quel véhicule tu utilises pour covoiturer. Cela permet d'ajouter une
                     touche de confiance et de clarté pour les personnes qui voyageront avec toi.
                 </Text>
                 <Image source={carVerification} style={styles.image} />
@@ -47,13 +58,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 16,
+    },
+    backButton: {
+        marginRight: 8,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: colors.text,
-        marginTop: 36,
-        marginBottom: 8,
-        alignSelf: 'flex-start',
+        flex: 1,
     },
     description: {
         marginTop: 16,

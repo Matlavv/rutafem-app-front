@@ -6,7 +6,7 @@ import { Stepper } from '@/components/profile/Stepper';
 import colors from '@/styles/colors';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function drivingLicenceVerification() {
     const [recto, setRecto] = useState<{ name: string; loaded: boolean } | null>(null);
@@ -23,13 +23,23 @@ export default function drivingLicenceVerification() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Stepper currentStep={5} totalSteps={6} />
+            <Stepper currentStep={2} totalSteps={2} />
             <View style={styles.content}>
-                <Text style={styles.title}>Ton permis de conduire</Text>
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                        <SvgIcon
+                            name="chevronLeft"
+                            width={34}
+                            height={34}
+                            strokeColor={colors.black}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>Ton permis de conduire</Text>
+                </View>
                 <Text style={styles.description}>
                     Pour activer ton profil conducteur, on a besoin de vérifier ton permis de
-                    conduire. Pas d’inquiétude : l’image reste confidentielle et ne sera utilisée
-                    qu’à des fins de vérification.
+                    conduire. Pas d'inquiétude : l'image reste confidentielle et ne sera utilisée
+                    qu'à des fins de vérification.
                 </Text>
                 {!(recto || verso) ? (
                     <Image source={permis} style={styles.image} />
@@ -72,7 +82,7 @@ export default function drivingLicenceVerification() {
             </View>
             <Button
                 title="Continuer"
-                onPress={() => router.push('/Profile/userProfileDetails')}
+                onPress={() => router.push('/(tabs)/account/profile')}
                 color={colors.primary}
                 isFixedBottom={true}
                 disabledColor={colors.grayLight}
@@ -97,13 +107,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 16,
+    },
+    backButton: {
+        marginRight: 8,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: colors.text,
-        marginTop: 16,
-        marginBottom: 8,
-        alignSelf: 'flex-start',
+        flex: 1,
     },
     description: {
         marginTop: 16,

@@ -14,7 +14,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function RegisterScreen() {
     const [formData, setFormData] = useState({
@@ -63,7 +63,7 @@ export default function RegisterScreen() {
         }
         const success = await register(formData);
         if (success) {
-            router.replace('/(tabs)/profile');
+            router.replace('/(tabs)/account/profile');
         } else {
             Alert.alert('Erreur', "Une erreur est survenue lors de l'inscription");
         }

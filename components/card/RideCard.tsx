@@ -1,16 +1,14 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import { router } from 'expo-router';
 import colors from '@/styles/colors';
+import { router } from 'expo-router';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // DATAS
+import SvgIcon from '@/components/elements/SvgIcon';
 import usersDatas from '@/datas/users.json';
 import usersRidesDatas from '@/datas/users_rides.json';
-import SvgIcon from '@/components/elements/SvgIcon';
-
 
 export default function RideCard({ ride }: { ride: Ride }) {
-
     const driverId = usersRidesDatas.find(
         (user_ride) => user_ride.ride_id === ride.id && user_ride.driver === true,
     );
@@ -21,7 +19,7 @@ export default function RideCard({ ride }: { ride: Ride }) {
     return (
         <TouchableOpacity
             style={styles.card}
-            onPress={() => router.push({ pathname: '/Ride/rideDetail', params: ride })}
+            onPress={() => router.push({ pathname: '/ride/rideDetail', params: ride })}
         >
             <View>
                 {/* Avatar */}

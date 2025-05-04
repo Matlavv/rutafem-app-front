@@ -223,6 +223,7 @@ export default function CreateScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginBottom: 56,
     },
     header: {
         alignItems: 'center',

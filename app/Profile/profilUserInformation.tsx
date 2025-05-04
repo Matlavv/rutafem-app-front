@@ -55,9 +55,22 @@ export default function profilUserInformation() {
                     showsVerticalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
                 >
-                    <Stepper currentStep={2} totalSteps={6} />
+                    <Stepper currentStep={2} totalSteps={5} />
                     <View style={styles.content}>
-                        <Text style={styles.title}>Tes informations</Text>
+                        <View style={styles.headerContainer}>
+                            <TouchableOpacity
+                                onPress={() => router.back()}
+                                style={styles.backButton}
+                            >
+                                <SvgIcon
+                                    name="chevronLeft"
+                                    width={34}
+                                    height={34}
+                                    strokeColor={colors.black}
+                                />
+                            </TouchableOpacity>
+                            <Text style={styles.title}>Tes informations</Text>
+                        </View>
                         <View style={styles.avatarWrapper}>
                             <SvgIcon
                                 name="profile"
@@ -207,13 +220,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 16,
+    },
+    backButton: {
+        marginRight: 8,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: colors.text,
-        marginTop: 16,
-        marginBottom: 8,
-        alignSelf: 'flex-start',
+        flex: 1,
     },
     avatarWrapper: {
         alignItems: 'center',

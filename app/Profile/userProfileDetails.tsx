@@ -12,6 +12,7 @@ import {
     StyleSheet,
     Text,
     TextInput,
+    TouchableOpacity,
     View,
 } from 'react-native';
 
@@ -39,9 +40,22 @@ export default function userProfileDetails() {
                     showsVerticalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
                 >
-                    <Stepper currentStep={6} totalSteps={6} />
+                    <Stepper currentStep={5} totalSteps={5} />
                     <View style={styles.content}>
-                        <Text style={styles.title}>Un petit mot sur toi</Text>
+                        <View style={styles.headerContainer}>
+                            <TouchableOpacity
+                                onPress={() => router.back()}
+                                style={styles.backButton}
+                            >
+                                <SvgIcon
+                                    name="chevronLeft"
+                                    width={34}
+                                    height={34}
+                                    strokeColor={colors.black}
+                                />
+                            </TouchableOpacity>
+                            <Text style={styles.title}>Un petit mot sur toi</Text>
+                        </View>
                         <Text style={styles.description}>
                             Dis-nous ce que tu aimes, ce que tu cherches dans tes voyages, ou ce qui
                             te rend unique 🌍 Ajoute aussi tes réseaux si tu veux. Plus on en sait,
@@ -122,7 +136,7 @@ export default function userProfileDetails() {
                     <View style={styles.buttonContainer}>
                         <Button
                             title="Accepter et finir"
-                            onPress={() => router.push('/(tabs)/profile')}
+                            onPress={() => router.push('/(tabs)/account/profile')}
                             color={colors.primary}
                             disabledColor={colors.grayLight}
                             style={styles.nextButton}
@@ -164,13 +178,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 16,
+    },
+    backButton: {
+        marginRight: 8,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: colors.text,
-        marginTop: 16,
-        marginBottom: 8,
-        alignSelf: 'flex-start',
+        flex: 1,
     },
     avatarWrapper: {
         alignItems: 'center',

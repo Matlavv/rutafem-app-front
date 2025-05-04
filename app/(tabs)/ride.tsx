@@ -42,7 +42,7 @@ export default function RideScreen() {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, marginBottom: 56 }}>
             <Header
                 title="RutaFem"
                 image={mountain}
