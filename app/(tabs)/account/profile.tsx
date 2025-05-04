@@ -5,7 +5,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { router, useNavigation } from 'expo-router';
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function ProfileScreen() {
     const { user, isAuthenticated, logout } = useAuth();
@@ -14,7 +14,7 @@ export default function ProfileScreen() {
     useFocusEffect(
         React.useCallback(() => {
             if (!isAuthenticated || !user) {
-                router.push('/Auth/login');
+                router.push('/(tabs)/account/login');
             }
         }, [isAuthenticated, user]),
     );

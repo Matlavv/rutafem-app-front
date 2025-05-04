@@ -94,7 +94,7 @@ export default function TabLayout() {
             />
 
             <Tabs.Screen
-                name="profile"
+                name="account"
                 options={{
                     title: 'Profil',
                     tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (

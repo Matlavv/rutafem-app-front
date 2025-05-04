@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 // TODO navbar dans login et register
 
@@ -31,7 +31,7 @@ export default function LoginScreen() {
         const success = await login(email, password);
         if (success) {
             setHasError(false);
-            router.replace('/(tabs)/profile');
+            router.replace('/(tabs)/account/profile');
         } else {
             setHasError(true);
         }
