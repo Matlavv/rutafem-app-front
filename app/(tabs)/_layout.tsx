@@ -12,18 +12,26 @@ export default function TabLayout() {
                 tabBarInactiveTintColor: '#000000',
                 headerShown: false,
                 tabBarStyle: Platform.select({
-                    // ios: {
-                    //   position: 'absolute',
-                    //   backgroundColor: '#F4F3F1',
-                    //   borderTopWidth: 0,
-                    // },
                     default: {
+                        position: 'absolute',
+                        bottom: 10,
+                        left: 20,
+                        right: 20,
                         backgroundColor: '#FFFFFF',
-                        borderTopWidth: 0,
-                        boxShadow: `0px 0px 0px 1px ${colors.grayLight}`,
-                        borderTopLeftRadius: 30,
-                        borderTopRightRadius: 30,
-                        paddingTop: 10,
+                        borderWidth: 1,
+                        borderColor: colors.grayLight,
+                        borderRadius: 30,
+                        height: 60,
+                        paddingTop: 3,
+                        paddingBottom: 8,
+                        elevation: 5,
+                        shadowColor: '#000',
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
                     },
                 }),
             }}
@@ -35,8 +43,8 @@ export default function TabLayout() {
                     tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
                         <SvgIcon
                             name="home"
-                            width={24}
-                            height={24}
+                            width={28}
+                            height={28}
                             fillColor={focused ? color : '#FFFFFF'}
                             strokeColor={focused ? '#FF0381' : '#000'}
                             strokeWidth={focused ? 0 : 1}
@@ -51,8 +59,8 @@ export default function TabLayout() {
                     tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
                         <SvgIcon
                             name="car"
-                            width={24}
-                            height={24}
+                            width={28}
+                            height={28}
                             fillColor={focused ? color : '#FFFFFF'}
                             strokeColor={focused ? '#FF0381' : '#000'}
                             strokeWidth={focused ? 0 : 1}
@@ -67,8 +75,8 @@ export default function TabLayout() {
                     tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
                         <SvgIcon
                             name="addRide"
-                            width={24}
-                            height={24}
+                            width={28}
+                            height={28}
                             fillColor={focused ? color : '#FFFFFF'}
                             strokeColor={focused ? '#FF0381' : '#000'}
                             strokeWidth={focused ? 0 : 1}
@@ -83,8 +91,8 @@ export default function TabLayout() {
                     tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
                         <SvgIcon
                             name="message"
-                            width={24}
-                            height={24}
+                            width={28}
+                            height={28}
                             fillColor={focused ? color : '#FFFFFF'}
                             strokeColor={focused ? '#FF0381' : '#000'}
                             strokeWidth={focused ? 0 : 1}
@@ -100,8 +108,8 @@ export default function TabLayout() {
                     tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
                         <SvgIcon
                             name="profile"
-                            width={24}
-                            height={24}
+                            width={28}
+                            height={28}
                             fillColor={focused ? color : '#FFFFFF'}
                             strokeColor={focused ? '#FF0381' : '#000'}
                             strokeWidth={focused ? 0 : 1}

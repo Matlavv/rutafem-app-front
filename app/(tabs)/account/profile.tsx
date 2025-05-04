@@ -227,6 +227,6 @@ const styles = StyleSheet.create({
     },
     verifyBtnContainer: {
         width: '100%',
-        paddingBottom: 24,
+        marginBottom: 56,
     },
 });
