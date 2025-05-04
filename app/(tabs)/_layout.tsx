@@ -112,7 +112,7 @@ export default function TabLayout() {
                             height={28}
                             fillColor={focused ? color : '#FFFFFF'}
                             strokeColor={focused ? '#FF0381' : '#000'}
-                            strokeWidth={focused ? 0 : 1}
+                            strokeWidth={focused ? 1 : 1}
                         />
                     ),
                 }}
